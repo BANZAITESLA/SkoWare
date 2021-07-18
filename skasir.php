@@ -67,7 +67,7 @@
 
                 <div class="button"> <!-- isi button -->
                     <a href="listpesananpl.php">Pesanan Minuman</a>
-                    <a href="koki-pesanan-minuman.php">Pesanan Waiting List</a>
+                    <a href="waitinglist.php">Pesanan Waiting List</a>
                     <a href="listmenu.php">Laporan Keuangan</a>
                 </div>
 
