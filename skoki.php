@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/jquery-ui.css">
     <style>
         .sidebar {
             display: block;
@@ -66,7 +67,7 @@
                 <h1>Dashboard Koki</h1>
 
                 <div class="button"> <!-- isi button -->
-                    <a href="listpesananpl.php">Menu Minuman</a>
+                    <a href="dkoki.php">Menu Minuman</a>
                     <a href="rincianwl.php">Pesanan Minuman</a>
                     <a href="listmenu.php">Pesanan Selesai</a>
                 </div>
@@ -83,7 +84,9 @@
             </div>
         </div>
     <?php } ;?>
-    
 </body>
 <script src="https://kit.fontawesome.com/50adeae078.js" crossorigin="anonymous"></script>
+<script src="dist/sweetalert2.all.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 </html>
