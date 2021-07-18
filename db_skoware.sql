@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Jul 2021 pada 02.34
--- Versi server: 10.4.18-MariaDB
--- Versi PHP: 7.4.16
+-- Generation Time: Jul 18, 2021 at 09:22 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,11 +20,13 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_skoware`
 --
+CREATE DATABASE IF NOT EXISTS `db_skoware` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `db_skoware`;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `meja_dan_kursi`
+-- Table structure for table `meja_dan_kursi`
 --
 
 CREATE TABLE `meja_dan_kursi` (
@@ -34,7 +36,7 @@ CREATE TABLE `meja_dan_kursi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `meja_dan_kursi`
+-- Dumping data for table `meja_dan_kursi`
 --
 
 INSERT INTO `meja_dan_kursi` (`no_meja`, `status`, `id_pelanggan`) VALUES
@@ -47,7 +49,7 @@ INSERT INTO `meja_dan_kursi` (`no_meja`, `status`, `id_pelanggan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `menu_minuman`
+-- Table structure for table `menu_minuman`
 --
 
 CREATE TABLE `menu_minuman` (
@@ -62,7 +64,7 @@ CREATE TABLE `menu_minuman` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pegawai`
+-- Table structure for table `pegawai`
 --
 
 CREATE TABLE `pegawai` (
@@ -75,7 +77,7 @@ CREATE TABLE `pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `pegawai`
+-- Dumping data for table `pegawai`
 --
 
 INSERT INTO `pegawai` (`id_pegawai`, `nama_pegawai`, `jabatan`, `alamat`, `no_telp`, `password`) VALUES
@@ -87,7 +89,7 @@ INSERT INTO `pegawai` (`id_pegawai`, `nama_pegawai`, `jabatan`, `alamat`, `no_te
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pelanggan`
+-- Table structure for table `pelanggan`
 --
 
 CREATE TABLE `pelanggan` (
@@ -97,7 +99,7 @@ CREATE TABLE `pelanggan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `pelanggan`
+-- Dumping data for table `pelanggan`
 --
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `jml_pelanggan`) VALUES
@@ -108,7 +110,7 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `jml_pelanggan`) VALU
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pembayaran`
+-- Table structure for table `pembayaran`
 --
 
 CREATE TABLE `pembayaran` (
@@ -124,7 +126,7 @@ CREATE TABLE `pembayaran` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `waiting_list`
+-- Table structure for table `waiting_list`
 --
 
 CREATE TABLE `waiting_list` (
@@ -138,33 +140,33 @@ CREATE TABLE `waiting_list` (
 --
 
 --
--- Indeks untuk tabel `meja_dan_kursi`
+-- Indexes for table `meja_dan_kursi`
 --
 ALTER TABLE `meja_dan_kursi`
   ADD PRIMARY KEY (`no_meja`),
   ADD KEY `id_pelanggan` (`id_pelanggan`);
 
 --
--- Indeks untuk tabel `menu_minuman`
+-- Indexes for table `menu_minuman`
 --
 ALTER TABLE `menu_minuman`
   ADD PRIMARY KEY (`id_menu`),
   ADD KEY `id_pegawai` (`id_pegawai`);
 
 --
--- Indeks untuk tabel `pegawai`
+-- Indexes for table `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id_pegawai`);
 
 --
--- Indeks untuk tabel `pelanggan`
+-- Indexes for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`id_pelanggan`);
 
 --
--- Indeks untuk tabel `pembayaran`
+-- Indexes for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
   ADD PRIMARY KEY (`id_pesanan`),
@@ -172,52 +174,52 @@ ALTER TABLE `pembayaran`
   ADD KEY `id_pelanggan` (`id_pelanggan`);
 
 --
--- Indeks untuk tabel `waiting_list`
+-- Indexes for table `waiting_list`
 --
 ALTER TABLE `waiting_list`
   ADD KEY `id_pesanan` (`id_pesanan`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `pelanggan`
+-- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
   MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `pembayaran`
+-- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
   MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `meja_dan_kursi`
+-- Constraints for table `meja_dan_kursi`
 --
 ALTER TABLE `meja_dan_kursi`
   ADD CONSTRAINT `meja_dan_kursi_ibfk_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id_pelanggan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `menu_minuman`
+-- Constraints for table `menu_minuman`
 --
 ALTER TABLE `menu_minuman`
   ADD CONSTRAINT `menu_minuman_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `pembayaran`
+-- Constraints for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
   ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`id_menu`) REFERENCES `menu_minuman` (`id_menu`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pembayaran_ibfk_2` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id_pelanggan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `waiting_list`
+-- Constraints for table `waiting_list`
 --
 ALTER TABLE `waiting_list`
   ADD CONSTRAINT `waiting_list_ibfk_1` FOREIGN KEY (`id_pesanan`) REFERENCES `pembayaran` (`id_pesanan`) ON DELETE CASCADE ON UPDATE CASCADE;
