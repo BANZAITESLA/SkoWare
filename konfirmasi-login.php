@@ -23,7 +23,7 @@
                     } else if($parse == 'KS'){
                         $url = ''; /* dashboard kasir */
                     } else if($parse == 'PL'){
-                        $url = ''; /* dashboard pelanggan */
+                        $url = 'L012.php'; /* dashboard pelayan */
                     } else {
                         $url = ''; /* dashboard pemilik*/
                     }
