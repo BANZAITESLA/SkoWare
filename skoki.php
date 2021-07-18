@@ -82,8 +82,7 @@
                 </div>
             </div>
         </div>
-    <?php } ;
-    sidebar();?>
+    <?php } ;?>
     
 </body>
 <script src="https://kit.fontawesome.com/50adeae078.js" crossorigin="anonymous"></script>
