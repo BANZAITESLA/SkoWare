@@ -24,7 +24,7 @@
                     display: flex;
                     justify-content: flex-end;
                     align-items: center;
-                    width: 50vw;
+                    width: 55vw;
 
                     font-weight: bold;
                     font-size: 16px;
