@@ -68,7 +68,7 @@
 
                 <div class="button"> <!-- isi button -->
                     <a href="dkoki.php">Menu Minuman</a>
-                    <a href="rincianwl.php">Pesanan Minuman</a>
+                    <a href="koki-pesanan-minuman.php">Pesanan Minuman</a>
                     <a href="listmenu.php">Pesanan Selesai</a>
                 </div>
 
