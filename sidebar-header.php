@@ -22,9 +22,9 @@
                 }
                 .nama {
                     display: flex;
-                    justify-content: right;
+                    justify-content: flex-end;
                     align-items: center;
-                    width: 56vw;
+                    width: 50vw;
 
                     font-weight: bold;
                     font-size: 16px;
