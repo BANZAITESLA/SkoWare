@@ -29,7 +29,7 @@
                             <tr>
                                 <td><?php echo $barisdata["nama_menu"];?></td>
                                 <td align="right" width="50px"><?php echo $barisdata["stok"];?></td>
-                                <td align="right" width="160px"><?php echo $barisdata["harga_item"];?></td>
+                                <td align="right" width="160px"><?php echo "Rp ".number_format($barisdata["harga_item"],0,",",".");?></td>
                                 <td align="center" width="120px">
                                     <a href="KK-edit-menu.php?id_menu=<?php echo $barisdata["id_menu"];?>"><button>Edit</button></a>
                                     <a href="#"><button id="hapus">Hapus</button></a>
