@@ -42,11 +42,17 @@
                         logo();
                     ?>
                 </div>
-                <div class="nama">    
-                    <?php
-                        echo "Hai, ".$_SESSION['nama_pegawai'];
-                    ?>
-                </div>
+                <?php
+                    if($filesidebar != "spelanggan.php") {
+                ?>
+                        <div class="nama">    
+                            <?php
+                                echo "Hai, ".$_SESSION['nama_pegawai'];
+                            ?>
+                        </div>
+                <?php
+                    }
+                ?>
             </div>
         </body>
         </html>
