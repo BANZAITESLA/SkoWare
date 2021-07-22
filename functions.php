@@ -32,6 +32,26 @@
             return $db; 
         }
 
+        function getMenu($id) {
+            $db=dbConnect();
+            if($db->connect_errno==0){
+                $res=$db->query("SELECT * FROM menu_minuman WHERE id_menu='$id'");
+                if($res){
+                    if($res->num_rows>0){
+                        $data=$res->fetch_assoc();
+                        $res->free();
+                        return $data;
+                    }
+                    else
+                        return false;
+                }
+                else
+                    return false; 
+            }
+            else
+                return false;
+        }
+
         function redirect($url) { /* function untuk redirect url jika header tidak berfungsi */
             if (!headers_sent())
             {    
@@ -78,11 +98,11 @@
         function loginsalah() { /* alert untuk username dan password salah */
             $(document).ready(function() {
                 Swal.fire({
-                    icon : 'warning',
-                    title : 'Peringatan',
+                    icon : 'error',
+                    title : 'Kesalahan',
                     text : 'Username dan Password tidak valid.',
                     textColor : '000000',
-                    confirmButtonText: 'Ya',
+                    confirmButtonText: 'Ok',
                     confirmButtonColor: '#6A6363'
                 })
             });
@@ -94,7 +114,7 @@
                     icon : 'warning',
                     title : 'Peringatan',
                     text : 'Silahkan Login Terlebih Dahulu.',
-                    confirmButtonText: 'Ya',
+                    confirmButtonText: 'Ok',
                     confirmButtonColor: '#6A6363',
                 })
             });
@@ -103,10 +123,46 @@
         function dberror() { /* alert untuk koneksi db error */
             $(document).ready(function() {
                 Swal.fire({
-                    icon : 'warning',
-                    title : 'Peringatan',
+                    icon : 'error',
+                    title : 'Kesalahan',
                     text : 'Koneksi Database Error. Hubungi Administrator.',
-                    confirmButtonText: 'Ya',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#6A6363',
+                })
+            });
+        }
+
+        function sqlerror() { /* alert untuk query sql error */
+            $(document).ready(function() {
+                Swal.fire({
+                    icon : 'error',
+                    title : 'Kesalahan',
+                    text : 'Tambah Data Gagal. Cek kembali ID yang diinput.',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#6A6363',
+                })
+            });
+        }
+
+        function uploaderror() { /* alert untuk upload gambar error */
+            $(document).ready(function() {
+                Swal.fire({
+                    icon : 'error',
+                    title : 'Kesalahan',
+                    text : 'Upload Gambar Gagal. Cek kembali Type dan Ukuran gambar.',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#6A6363',
+                })
+            });
+        }
+
+        function nodata() { /* alert untuk data tidak ditemukan */
+            $(document).ready(function() {
+                Swal.fire({
+                    icon : 'warning',
+                    title : 'Kesalahan',
+                    text : 'Data Tidak Ditemukan.',
+                    confirmButtonText: 'Ok',
                     confirmButtonColor: '#6A6363',
                 })
             });
@@ -118,7 +174,19 @@
                     icon : 'warning',
                     title : 'Peringatan',
                     text : 'Error tidak dikenal.',
-                    confirmButtonText: 'Ya',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#6A6363',
+                })
+            });
+        }
+
+        function tambahsuccess() { /* alert untuk tambah data berhasil */
+            $(document).ready(function() {
+                Swal.fire({
+                    icon : 'success',
+                    title : 'Berhasil',
+                    text : 'Data Berhasil Disimpan.',
+                    confirmButtonText: 'Ok',
                     confirmButtonColor: '#6A6363',
                 })
             });

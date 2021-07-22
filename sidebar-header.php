@@ -1,6 +1,6 @@
 <?php
+    session_start();
     function sidehead($filesidebar) {
-        session_start();
         include_once("$filesidebar");
         include_once("functions.php");
 ?>
