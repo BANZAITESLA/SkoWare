@@ -51,6 +51,43 @@
             else
                 return false;
         }
+        
+        function getDataPelanggan($id_pelanggan) {
+        $db = dbConnect();
+        if ($db->connect_errno == 0) {
+            $res = $db->query("SELECT  id_pelanggan, nama_pelanggan, jml_pelanggan FROM pelanggan 
+            WHERE id_pelanggan='$id_pelanggan'");
+            if ($res) {
+                if ($res->num_rows > 0) {
+                    $data = $res->fetch_assoc();
+                    $res->free();
+                    return $data;
+                } else
+                return FALSE;
+            } else
+            return FALSE;
+        } else
+        return FALSE;
+    } 
+
+    function getDataMejaDanKursi($no_meja) {
+        $db = dbConnect();
+        if ($db->connect_errno == 0) {
+            $res = $db->query("SELECT m.no_meja, m.status, p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan
+            FROM meja_dan_kursi m LEFT JOIN pelanggan p ON m.id_pelanggan=p.id_pelanggan
+            WHERE m.no_meja='$no_meja'");
+            if ($res) {
+                if ($res->num_rows > 0) {
+                    $data = $res->fetch_assoc();
+                    $res->free();
+                    return $data;
+                } else
+                return FALSE;
+            } else
+            return FALSE;
+        } else
+        return FALSE;
+    }
 
         function redirect($url) { /* function untuk redirect url jika header tidak berfungsi */
             if (!headers_sent())
