@@ -1,6 +1,7 @@
 <?php
     include_once("sidebar-header.php");
     sidehead("skoki.php");
+    include_once("functions.php");
 ?>
 <html lang="en">
 <head>
@@ -42,18 +43,10 @@
         .cari input {
             padding: 10px;
             border: 0 solid;
-            border-radius: 10px 0px 0px 10px;
+            border-radius: 10px;
             background-color: #C4C4C4;
 
             font-family: inherit;
-        }
-        .cari a {
-            padding: 10px;
-            border-radius: 0px 10px 10px 0px;
-            background-color: #C4C4C4;
-
-            font-size: 14px;
-            color: black;
         }
         .tambah {
             display: flex;
@@ -83,7 +76,7 @@
         tbody {
             display:block;
             overflow-y:auto;
-            max-height:20vw; /* ubah untuk menyesuaikan tinggi tabel */
+            max-height:21vw; /* ubah untuk menyesuaikan tinggi tabel */
             width: 100%;
         }
         th {
@@ -116,7 +109,7 @@
         .simpan {
             position: fixed;
             padding: 8px;
-            bottom: 50px;
+            bottom: 40px;
             right: 50px;
 
             background-color: #6A6363;
@@ -132,47 +125,71 @@
     </style>
 </head>
 <body>
+    <?php
+        if (isset($_GET["error"])) { /* ketika terdapat error */
+            $error = $_GET["error"];
+            if ($error == 1) {
+                echo '<script type="text/javascript">','dberror();','</script>'; /* alert koneksi db error */
+            } else if ($error == 2){ 
+                echo '<script type="text/javascript">','nodata();','</script>'; /* alert untuk data tidak ditemukan */
+            } else {
+                echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
+            }
+        }
+
+        if (isset($_GET["success"])) { /* ketika proses berhasil */
+            $success = $_GET["success"];
+            if ($success== 1) {
+                echo '<script type="text/javascript">','tambahsuccess();','</script>'; /* alert berhasil tambah data */
+            }
+        }
+    ?>
     <div class="isi">
         <div class="judul"> <!-- judul page -->
             MENU MINUMAN
         </div>
+
         <div class="caridantambah">
             <div class="cari"> <!-- cari item -->
-                <input type="text" placeholder="Cari Menu" name="username">
-                <a href="#"><i class="fas fa-search"></i></a>
-                </input>
+                <input type="text" placeholder="Cari Menu" id="cari"></input>
             </div>
             <div class="tambah"> <!-- button tambah -->
-                <a href="#">Tambah Menu</a>
+                <a href="koki-tambah-menu.php">Tambah Menu</a>
             </div>
         </div>
-        <div class="table"> <!-- table -->
-            <table cellspacing="0" cellpadding="5">
-                <thead>
-                    <tr>
-                        <th>Nama Menu</th>
-                        <th width="50px">Stok</th>
-                        <th width="160px">Harga Item</th>
-                        <th width="120px">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>q</td>
-                        <td align="right" width="50px">1</td>
-                        <td align="right" width="160px">0</td>
-                        <td align="center" width="120px">
-                            <a href="#"><button>Edit</button></a>
-                            <a href="#"><button>Hapus</button></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+
+        <div class="table" id="table"></div> <!-- tempat table -->
+
         <div class="simpan"> <!-- button simpan -->
-            <a href="#">Simpan Menu Hari Ini</a>
+            <a href="list-menu.php">Simpan dan Lihat Menu Hari Ini</a>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            load_data();
+
+            function load_data(query) { /* ajax untuk menampilkan hasil table */
+                $.ajax({
+                    url:"KK-tabel-menu.php",
+                    method:"POST",
+                    data:{query:query},
+                    success:function(data) {
+                        $('#table').html(data);
+                    }
+                });
+            }
+
+            $('#cari').keyup(function() { /* jquery ketika terdapat input cari */
+                var pencarian = $(this).val();
+                if(pencarian != '') {
+                    load_data(pencarian);
+                } else {
+                    load_data();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 <script src="dist/sweetalert2.all.min.js"></script>
