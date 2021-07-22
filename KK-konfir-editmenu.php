@@ -35,15 +35,22 @@
     }
 
     function cekUpload() {
-        $namafile = $_FILES['file']['name'];
-        $error = $_FILES['file']['error'];
-        $tmpName = $_FILES['file']['tmp_name'];
-        $extValid = ['png', 'jpeg', 'jpg'];
-        $size = $_FILES['file']['size'];
         $lama=$_POST['file_lama'];
-        $ext = explode('.', $namafile);
-        $ext = strtolower(end($ext));
-
+        if(!($_FILES['file']['name'])) {
+            return $lama;
+        } else {
+            $namafile = $_FILES['file']['name'];
+            $error = $_FILES['file']['error'];
+            $tmpName = $_FILES['file']['tmp_name'];
+            $extValid = ['png', 'jpeg', 'jpg'];
+            $size = $_FILES['file']['size'];
+            $ext = explode('.', $namafile);
+            $ext = strtolower(end($ext));
+            
+            unlink("gambar/".$lama);
+            move_uploaded_file($tmpName, 'gambar/'.$namafile);
+            return $namafile;
+        }
         if(!in_array($ext, $extValid)) {
             return false;
         }
@@ -51,8 +58,5 @@
         if($size > 5000000) {
             return false;
         }
-        unlink("gambar/".$lama);
-        move_uploaded_file($tmpName, 'gambar/'.$namafile);
-        return $namafile;
     }
 ?>
