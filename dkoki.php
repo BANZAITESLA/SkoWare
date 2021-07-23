@@ -86,10 +86,10 @@
         td {
             height: 30px;
         }
-        tr:nth-child(odd) {
+        tr:nth-child(2n+1) {
             background : #C4C4C4;
         }
-        tr:nth-child(even) {
+        tr:nth-of-type(even) {
             background : white;
         }
         td button {

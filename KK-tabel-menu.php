@@ -32,11 +32,46 @@
                                 <td align="right" width="160px"><?php echo "Rp ".number_format($barisdata["harga_item"],0,",",".");?></td>
                                 <td align="center" width="120px">
                                     <a href="KK-edit-menu.php?id_menu=<?php echo $barisdata["id_menu"];?>"><button>Edit</button></a>
-                                    <a href="#"><button id="hapus">Hapus</button></a>
-                                    <input type="hidden" id="id_menu" value="<?php echo $barisdata["id_menu"];?>">
+                                    <a href="#"><button class="hapus" id="hapus=<?php echo $barisdata["id_menu"];?>">Hapus</button></a>
                                 </td>
                             </tr>
+
+                            <script>
+                                document.getElementById("hapus=<?php echo $barisdata["id_menu"];?>").addEventListener('click', function() { /* ketika button hapus diklik */
+                                    Swal.fire({ /* validasi hapus data */
+                                        icon : 'question',
+                                        title : 'Konfirmasi',
+                                        text : 'Yakin Hapus Data?',
+                                        confirmButtonText: 'Hapus',
+                                        confirmButtonColor: '#DA4453',
+                                        showCancelButton : true,
+                                        cancelButtonText: 'Tidak',
+                                        cancelButtonColor: '#6A6363'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) { /* jika user mengklik 'Hapus' */
+                                            $(function(){
+                                                $.ajax ({ /* ajax hapus sesuai id menu */
+                                                    type: 'POST',
+                                                    url : "KK-konfir-hapusmenu.php?id_menu=<?php echo $barisdata["id_menu"];?>"
+                                                })
+                                            })
+                                            Swal.fire({
+                                                icon : 'success',
+                                                title : 'Berhasil',
+                                                text : 'Data Telah dihapus.',
+                                                confirmButtonText : 'Ok',
+                                                confirmButtonColor : '#6A6363'
+                                            }).then((result) => { /* jika proses berhasil maka load table kembali */
+                                                $(document).ready(function(){
+                                                    $('#table').load("KK-tabel-menu.php");
+                                                })
+                                            })
+                                        }
+                                    })
+                                })
+                            </script>
             <?php
+            
                         }
                         $res->free();
                     }
@@ -48,37 +83,3 @@
         </tbody>
     </table>
 </div>
-<script>
-    document.querySelector("#hapus").addEventListener('click', function() { /* ketika button hapus diklik */
-        Swal.fire({ /* validasi hapus data */
-            icon : 'question',
-            title : 'Konfirmasi',
-            text : 'Yakin Hapus Data?',
-            confirmButtonText: 'Hapus',
-            confirmButtonColor: '#DA4453',
-            showCancelButton : true,
-            cancelButtonText: 'Tidak',
-            cancelButtonColor: '#6A6363'
-        }).then((result) => {
-            if (result.isConfirmed) { /* jika user mengklik 'Hapus' */
-                $(function(){
-                    $.ajax ({ /* ajax hapus sesuai id menu */
-                        type: 'POST',
-                        url : "KK-konfir-hapusmenu.php?id_menu=" + document.getElementById("id_menu").value
-                    })
-                })
-                Swal.fire({
-                    icon : 'success',
-                    title : 'Berhasil',
-                    text : 'Data Telah dihapus.',
-                    confirmButtonText : 'Ok',
-                    confirmButtonColor : '#6A6363'
-                }).then((result) => { /* jika proses berhasil maka load table kembali */
-                    $(document).ready(function(){
-                        $('#table').load("KK-tabel-menu.php");
-                    })
-                })
-            }
-        })
-    })
-</script>
