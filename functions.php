@@ -228,6 +228,19 @@
                 })
             });
         }
+
+      function hapussuccess() { /* alert untuk tambah hapus berhasil */
+            $(document).ready(function() {
+                Swal.fire({
+                    icon : 'success',
+                    title : 'Berhasil',
+                    text : 'Data Berhasil Dihapus.',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#6A6363',
+                })
+            });
+        }
+
     </script>
 </body>
 <script src="https://kit.fontawesome.com/50adeae078.js" crossorigin="anonymous"></script>
