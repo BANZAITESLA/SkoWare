@@ -85,7 +85,7 @@
             <div class="sidebar"> <!-- bagian sidebar -->
                 <h1>Dashboard Pelayan</h1>
                 <div class="button"> <!-- isi button -->
-                    <a href="L012.php">Pengaturan Meja dan Kursi</a>
+                    <a href="L012.php">Pengaturan Meja</a>
                     <a href="L016.php">Waiting List</a>
                     <a href="L018.php">Pengantaran Pesanan</a>
                 </div>

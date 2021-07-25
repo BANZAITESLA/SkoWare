@@ -14,7 +14,6 @@
         body {
             background-color: #F5F5F5;
         }
-        
         .isi {
             position: absolute;
             display: block;
@@ -33,34 +32,13 @@
             font-size: 24px;
             letter-spacing: 10px;
         }
-        .caridantambah {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-
-            margin-top: 20px;
-        }
-        .cari input {
-            padding: 10px;
-            border: 0 solid;
-            border-radius: 10px 0px 0px 10px;
-            background-color: #C4C4C4;
-
-            font-family: inherit;
-        }
-        .cari a {
-            padding: 10px;
-            border-radius: 0px 10px 10px 0px;
-            background-color: #C4C4C4;
-
-            font-size: 14px;
-            color: black;
-        }
         .tambah {
             display: flex;
             justify-content: center;
             align-items: center;
+			
             margin-left: 87%;
+			margin-top: 20px;
             text-align: center;
             width: 100px;
             padding: 5px;
@@ -85,7 +63,7 @@
         tbody {
             display:block;
             overflow-y:auto;
-            max-height:20vw; /* ubah untuk menyesuaikan tinggi tabel */
+            max-height:24vw; /* ubah untuk menyesuaikan tinggi tabel */
             width: 100%;
         }
         th {
@@ -95,13 +73,13 @@
         td {
             height: 30px;
         }
-        tr:nth-child(odd) {
+        tr:nth-child(2n+1) {
             background : #C4C4C4;
         }
-        tr:nth-child(even) {
+        tr:nth-of-type(even) {
             background : white;
         }
-        td button {
+        td .button {
             padding: 3px;
             width: 70px;
 
@@ -115,11 +93,13 @@
             font-family: inherit;
             font-size: 12px;
         }
-     
+		.form {
+            display: inherit;
+        }
     </style>
 </head>
 <body> 
-<?php
+	<?php
         if (isset($_GET["error"])) { /* ketika terdapat error */
             $error = $_GET["error"];
             if ($error == 1) {
@@ -133,78 +113,36 @@
             $success = $_GET["success"];
             if ($success== 1) {
                 echo '<script type="text/javascript">','tambahsuccess();','</script>'; /* alert berhasil tambah data */
-            }if ($success== 2) {
-                echo '<script type="text/javascript">','hapussuccess();','</script>'; /* alert berhasil tambah data */
-            }
-        }
+			}
+		}
     ?>
-<div class="isi">
+	<div class="isi">
         <div class="judul"> <!-- judul page -->
             ATUR MEJA DAN KURSI
         </div>
     
-        <div class="caridantambah">
-            
-            <div class="tambah"> <!-- button tambah -->
-                <a href="L013.php">Tambah Meja</a>
-            </div>
-        </div>
+		<div class="tambah"> <!-- button tambah -->
+			<a href="L013.php">Tambah Meja</a>
+		</div>
 
-        <div class="table"> <!-- table -->
-        <?php
-                $db = dbConnect();
-                if ($db->connect_errno == 0) {
-               $sql = "SELECT m.no_meja, m.status, p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan
-               FROM meja_dan_kursi m LEFT JOIN pelanggan p ON m.id_pelanggan=p.id_pelanggan";
-                $res = $db->query($sql);
-                    if ($res) {
-                        ?>
-            <table cellspacing="0" cellpadding="5">
-                <thead>
-                    <tr>
-                        <th width="60px">No Meja</th>
-                        <th width="50px">Id Pelanggan</th>
-                        <th width="70px">Status</th>
-                        <th width="100px">Aksi</th>
-                    </tr>
-                </thead>
-                
-                <tbody>
-                <?php
-                            $data = $res->fetch_all(MYSQLI_ASSOC); // ambil seluruh baris data
-                            foreach ($data as $barisdata) { // telusuri satu per satu
-                            ?>
-                             <tr>
-                                <td align=center><?php echo $barisdata["no_meja"];?></td>
-                                <td align=center><?php echo $barisdata["id_pelanggan"];?></td>
-                                <td align=center><?php echo $barisdata["status"];?></td>
-                                <td align="center" width="70px">
-                                    <a href="L014.php?no_meja=<?php echo $barisdata["no_meja"]; ?>"><button>
-                                    Isi Meja</button></a></td>
-                                <td align="center" width="70px">
-                                    <a href="kosongkan-konfirmasi.php?no_meja=<?php echo $barisdata["no_meja"]; ?>"><button>
-                                    Kosongkan</button></a></td>
-                                 <td align="center" width="70px">
-                                    <a href="L015.php?no_meja=<?php echo $barisdata["no_meja"]; ?>"><button>
-                                    Edit</button></a></td>
-                                <td align="center" width="70px">
-                                <a href="hapusmeja-konfirmasi.php?no_meja=<?php echo $barisdata["no_meja"]; ?>"><button>
-                                    Hapus</button></a></td>
-                                
-                            </tr>
-                            <?php
-                            }
-                            ?>
-                        </table>
-                        <?php
-                        $res->free();
-                            } else
-                                echo "Gagal Eksekusi SQL" . (DEVELOPMENT ? " : " . $db->error : "") . "<br>";
-                            } else
-                                echo "Gagal koneksi" . (DEVELOPMENT ? " : " . $db->connect_error : "") . "<br>";
-                    ?>
-        </div>
+        <div class="table" id="table"></div> <!-- table -->
     </div>
+	<script>
+        $(document).ready(function(){
+            load_data();
+
+            function load_data(query) { /* ajax untuk menampilkan hasil table */
+                $.ajax({
+                    url:"PL-tabel-meja.php",
+                    method:"POST",
+                    data:{query:query},
+                    success:function(data) {
+                        $('#table').html(data);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 <script src="dist/sweetalert2.all.min.js"></script>
