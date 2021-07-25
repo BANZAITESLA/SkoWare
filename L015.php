@@ -32,8 +32,6 @@
             font-size: 24px;
             letter-spacing: 10px;
         }
-
-    
         .form {
             margin-top: 40px;
             width: 100%;
@@ -47,7 +45,6 @@
             margin-top: 15px;
         }
         .form-control label {
-            
             width: 25%;
 
             font-weight: bold;
@@ -63,15 +60,10 @@
             font-family: inherit;
             padding: 10px;
         }
-        small {
-            font-size: 12px;
-            font-weight: normal;
-        }
         .simpan-control {
             display: flex;
             justify-content: center;
             align-items: center;
-
         }
         .simpan {
             padding: 10px;
@@ -87,23 +79,10 @@
             font-family: inherit;
             font-size: 14px;
         }
-
-        .tambahmeja {
-            justify-content: right;
-            align-items: right;
-            font-size: 22px;
-            font-weight: bold;
-           margin-left: 20%;
-            padding-top: 60px;
-        }
-       
-    
-      
-    
     </style>
 </head>
 <body>
-<?php
+	<?php
         if (isset($_GET["error"])) { /* jika terdapar error */
             $error = $_GET["error"];
             if (substr($error, -1) == 1) {
@@ -112,59 +91,63 @@
                 echo '<script type="text/javascript">','uploaderror();','</script>'; /* alert upload gambar gagal */
             } else {
                 echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
-            
-        }
-    }
+			}
+		}
     ?>
 
-
-<div class="isi">
+	<div class="isi">
         <div class="judul"> <!-- judul page -->
             EDIT MEJA DAN KURSI
         </div>      
         
-        <form class="form" action="UpdateL015.php" method="post" enctype="multipart/form-data">
+        <form class="form" action="UpdateL015.php" method="post">
         <?php
-            if(isset($_GET["no_meja"]) or (isset($_GET["error"]))) { /* agar ketika error kembali ke form edit dgn id yg sama */
+            if (isset($_POST["edit"]) or (isset($_GET["error"]))) { /* agar ketika error kembali ke form edit dgn id yg sama */
                 $db=dbConnect();
-                $sql = "SELECT m.no_meja, m.status, p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan
-                FROM meja_dan_kursi m LEFT JOIN pelanggan p ON m.id_pelanggan=p.id_pelanggan";
-                if (isset($_GET["no_meja"])) {
-                    $no_meja = $db->escape_string($_GET['no_meja']);
+                
+                if (isset($_POST["edit"])) {
+                    $no_meja = $db->escape_string($_POST['no_meja']);
                 } else if ($_GET["error"]){
                     $subno_meja = substr($_GET["error"], 0, -1); /* manipulasi link error untuk mendapatkan id */
                     $no_meja = $db->escape_string($subno_meja);
                 }
+				
                 if($datamejadankursi=getDataMejaDanKursi($no_meja)){
         ?>
-        <div class="form-control">
-                <label for="no_meja">No Meja</label>
-                <input type="text" name="no_meja" value="<?php echo $datamejadankursi["no_meja"];?>" readonly></input>
-            </div>
-            <div class="form-control">
-                <input type="hidden" name="id_pelanggan" value="<?php echo $datamejadankursi["id_pelanggan"];?>"></input>
-            </div>
-            <div class="form-control">
-                <label for="nama_pelanggan">Nama Pelanggan</label>
-                <input type="text" name="nama_pelanggan" value="<?php echo $datamejadankursi["nama_pelanggan"];?>"></input>
-            </div>
-            <div class="form-control">
-                <label for="jml_pelanggan">Jumlah Pelanggan </label>
-                <input type="text" name="jml_pelanggan" value="<?php echo $datamejadankursi["jml_pelanggan"];?>"></input>
-            </div>
+					<div class="form-control">
+						<label for="no_meja">No Meja</label>
+						<input type="text" name="no_meja" value="<?php echo $datamejadankursi["no_meja"];?>" readonly></input>
+						<input type="hidden" name="id_pelanggan" value="<?php echo $datamejadankursi["id_pelanggan"];?>"></input>
+					</div>
+					<div class="form-control">
+						<label for="nama_pelanggan">Nama Pelanggan</label>
+						<input type="text" name="nama_pelanggan" value="<?php echo $datamejadankursi["nama_pelanggan"];?>"></input>
+					</div>
+					<div class="form-control">
+						<label for="jml_pelanggan">Jumlah Pelanggan </label>
+						<input type="text" id="jml" name="jml_pelanggan" value="<?php echo $datamejadankursi["jml_pelanggan"];?>"></input>
+					</div>
 
-            <div class="simpan-control">
-                <input class="simpan" type="submit" value="Simpan Data" name="TblUpdate"></input>
-            </div>
-            </form>
+					<div class="simpan-control">
+						<input class="simpan" type="submit" value="Simpan Data" name="TblUpdate"></input>
+					</div>
+		</form>
         <?php
-                } else {
-                    $url = 'L012.php?error=2';  //data tidak ditemukan
-                    redirect($url);
-                }
+				}
             }
         ?>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
+    <script>
+        new AutoNumeric('#jml', { /* live format angka */
+            decimalPlaces: '0',
+            decimalCharacter: ',',
+            digitGroupSeparator: '.',
+            minimumValue : '0'
+        })
+    </script>
 </body>
 </html>
+<script src="dist/sweetalert2.all.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>

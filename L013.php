@@ -107,7 +107,7 @@
 		<form class="form" action="SimpanL013.php" method="post">
 			<div class="form-control">
 				<label for="no_meja">No Meja</label>
-				<input type="text" name="no_meja"></input>
+				<input type="text" name="no_meja" id=no""></input>
 			</div>
 
 			<div class="simpan-control">
@@ -115,6 +115,15 @@
 			</div>
 		</form>
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
+    <script>
+        new AutoNumeric('#no', { /* live format angka */
+            decimalPlaces: '0',
+            decimalCharacter: ',',
+            digitGroupSeparator: '.',
+            minimumValue : '0'
+        })
+    </script>
 </body>
 </html>
 <script src="dist/sweetalert2.all.min.js"></script>

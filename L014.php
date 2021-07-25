@@ -116,7 +116,7 @@
 						</div>
 						<div class="form-control">
 							<label for="jml_pelanggan">Jumlah Pelanggan </label>
-							<input type="text" name="jml_pelanggan"></input>
+							<input type="text" name="jml_pelanggan" id="jml"></input>
 						</div>
 				
 						<div class="simpan-control">
@@ -128,5 +128,17 @@
 				} 
 			?>
     </div>
+	<script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
+    <script>
+        new AutoNumeric('#jml', { /* live format angka */
+            decimalPlaces: '0',
+            decimalCharacter: ',',
+            digitGroupSeparator: '.',
+            minimumValue : '0'
+        })
+    </script>
 </body>
 </html>
+<script src="dist/sweetalert2.all.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
