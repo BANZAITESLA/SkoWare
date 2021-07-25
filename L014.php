@@ -62,15 +62,10 @@
             font-family: inherit;
             padding: 10px;
         }
-        small {
-            font-size: 12px;
-            font-weight: normal;
-        }
         .simpan-control {
             display: flex;
             justify-content: center;
             align-items: center;
-
         }
         .simpan {
             padding: 10px;
@@ -86,22 +81,10 @@
             font-family: inherit;
             font-size: 14px;
         }
-
-        .tambahmeja {
-            justify-content: right;
-            align-items: right;
-            font-size: 22px;
-            font-weight: bold;
-           margin-left: 20%;
-            padding-top: 60px;
-        }
-       
-    
     </style>
 </head>
 <body>
-
-<?php
+	<?php
         if (isset($_GET["error"])) { /* ketika terdapat error */
             $error = $_GET["error"];
             if ($error == 1) {
@@ -111,45 +94,39 @@
             }
         }
     ?>
-<div class="isi">
+	<div class="isi">
         <div class="judul"> <!-- judul page -->
             ISI MEJA DAN KURSI
         </div>
        
-        <form class="form" action="SimpanL014.php" method="post" enctype="multipart/form-data">
-        <?php
-             if (isset($_GET["no_meja"])) { //biar bisa manggil no_meja readonly
-	        $db = dbConnect();
-	        $no_meja = $db->escape_string($_GET["no_meja"]);
-	         if ($datamejadankursi = getDataMejaDanKursi($no_meja)) {
-	        // cari data no_meja, kalau ada simpan di $datamejadankursi
-        ?>
-        <div class="form-control">
-                <label for="no_meja">No Meja</label>
-                <input type="text" name="no_meja" value="<?php echo $datamejadankursi["no_meja"];?>" readonly></input>
-            </div>
-            <div class="form-control">
-                <label for="nama_pelanggan">Nama Pelanggan</label>
-                <input type="text" name="nama_pelanggan"></input>
-            </div>
-            <div class="form-control">
-                <label for="jml_pelanggan">Jumlah Pelanggan </label>
-                <input type="text" name="jml_pelanggan"></input>
-            </div>
-    
-            <div class="simpan-control">
-                <input class="simpan" type="submit" value="Simpan No Meja" name="TblSimpan"></input>
-            </div>
+        <form class="form" action="SimpanL014.php" method="post">
+			<?php
+				if (isset($_POST["isi"])) { //biar bisa manggil no_meja readonly
+					$db = dbConnect();
+					$no_meja = $db->escape_string($_POST["no_meja"]);
+					if ($datamejadankursi = getDataMejaDanKursi($no_meja)) {
+			?>
+						<div class="form-control">
+							<label for="no_meja">No Meja</label>
+							<input type="text" name="no_meja" value="<?php echo $datamejadankursi["no_meja"];?>" readonly></input>
+						</div>
+						<div class="form-control">
+							<label for="nama_pelanggan">Nama Pelanggan</label>
+							<input type="text" name="nama_pelanggan"></input>
+						</div>
+						<div class="form-control">
+							<label for="jml_pelanggan">Jumlah Pelanggan </label>
+							<input type="text" name="jml_pelanggan"></input>
+						</div>
+				
+						<div class="simpan-control">
+							<input class="simpan" type="submit" value="Simpan No Meja" name="TblSimpan"></input>
+						</div>
         </form>
-	    <?php
-	    } else
-            echo "Pelanggan dengan No Meja : $no_meja tidak ada. Penambahan dibatalkan";
-            ?>
-            <?php
-            } else
-                echo "No Meja tidak ada. Penambahan dibatalkan.";
-        ?>
-        </div>
-</div>
+			<?php
+					} 
+				} 
+			?>
+    </div>
 </body>
 </html>
