@@ -63,10 +63,6 @@
             font-family: inherit;
             padding: 10px;
         }
-        small {
-            font-size: 12px;
-            font-weight: normal;
-        }
         .simpan-control {
             display: flex;
             justify-content: center;
@@ -87,39 +83,38 @@
             font-family: inherit;
             font-size: 14px;
         }
-    
     </style>
 </head>
 <body>
-<?php
-        if (isset($_GET["error"])) { /* ketika terdapat error */
-            $error = $_GET["error"];
-            if ($error == 1) {
-                echo '<script type="text/javascript">','sqlerror();','</script>'; /* alert tambah data gagal */
-            } 
-            else {
-                echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
-            }
-        }
-        ?>
+	<?php
+		if (isset($_GET["error"])) { /* ketika terdapat error */
+			$error = $_GET["error"];
+			if ($error == 1) {
+				echo '<script type="text/javascript">','sqlerror();','</script>'; /* alert tambah data gagal */
+			} 
+			else {
+				echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
+			}
+		}
+	?>
 
 
-<div class="isi">
-        <div class="judul"> <!-- judul page -->
-            TAMBAH DATA MEJA DAN KURSI
-        </div>
-       
-        <form class="form" action="SimpanL013.php" method="post" enctype="multipart/form-data">
-            <div class="form-control">
-                <label for="no_meja">No Meja</label>
-                <input type="text" name="no_meja"></input>
-            </div>
+	<div class="isi">
+		<div class="judul"> <!-- judul page -->
+			TAMBAH DATA MEJA DAN KURSI
+		</div>
+	   
+		<form class="form" action="SimpanL013.php" method="post">
+			<div class="form-control">
+				<label for="no_meja">No Meja</label>
+				<input type="text" name="no_meja"></input>
+			</div>
 
-            <div class="simpan-control">
-                <input class="simpan" type="submit" value="Simpan No Meja" name="simpan"></input>
-            </div>
-        </form>
-</div>
+			<div class="simpan-control">
+				<input class="simpan" type="submit" value="Simpan No Meja" name="simpan"></input>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
 <script src="dist/sweetalert2.all.min.js"></script>
