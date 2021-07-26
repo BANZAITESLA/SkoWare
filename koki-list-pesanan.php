@@ -28,7 +28,7 @@
             font-size: 24px;
             letter-spacing: 5px;
     }
-    .idpesanan {
+        .idpesanan {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
