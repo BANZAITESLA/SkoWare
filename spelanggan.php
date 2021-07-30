@@ -53,8 +53,7 @@
                 <h1>Cek Pesananmu!</h1>
 
                 <div class="button"> <!-- isi button -->
-                    <a href="listpesananpl.php">List Pesanan Pelanggan</a>
-                    <a href="rincianwl.php">Rincian Waiting List</a>
+                    <a href="index.php">List Pesanan Pelanggan</a>
                     <a href="list-menu.php">List Menu Minuman</a>
                 </div>
 
