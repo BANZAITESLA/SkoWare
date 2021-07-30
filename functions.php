@@ -73,9 +73,8 @@
     function getDataMejaDanKursi($no_meja) {
         $db = dbConnect();
         if ($db->connect_errno == 0) {
-            $res = $db->query("SELECT m.no_meja, m.status, p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan
-            FROM meja_dan_kursi m LEFT JOIN pelanggan p ON m.id_pelanggan=p.id_pelanggan
-            WHERE m.no_meja='$no_meja'");
+            $res = $db->query("SELECT m.no_meja, m.status, b.id_pesanan, b.tgl_bayar, b.waktu_datang, b.no_telp, b.total, p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan 
+                                FROM meja_dan_kursi m LEFT JOIN pesanan b ON m.id_pesanan=b.id_pesanan LEFT JOIN pelanggan p ON p.id_pelanggan = b.id_pelanggan WHERE m.no_meja = $no_meja");
             if ($res) {
                 if ($res->num_rows > 0) {
                     $data = $res->fetch_assoc();
