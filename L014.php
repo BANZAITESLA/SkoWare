@@ -42,7 +42,7 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
-           
+
             margin-top: 15px;
         }
         .form-control label {
@@ -84,7 +84,7 @@
     </style>
 </head>
 <body>
-	<?php
+    <?php
         if (isset($_GET["error"])) { /* ketika terdapat error */
             $error = $_GET["error"];
             if ($error == 1) {
@@ -94,41 +94,41 @@
             }
         }
     ?>
-	<div class="isi">
+    <div class="isi">
         <div class="judul"> <!-- judul page -->
             ISI MEJA DAN KURSI
         </div>
-       
+
         <form class="form" action="SimpanL014.php" method="post">
-			<?php
-				if (isset($_POST["isi"])) { //biar bisa manggil no_meja readonly
-					$db = dbConnect();
-					$no_meja = $db->escape_string($_POST["no_meja"]);
-					if ($datamejadankursi = getDataMejaDanKursi($no_meja)) {
-			?>
-						<div class="form-control">
-							<label for="no_meja">No Meja</label>
-							<input type="text" name="no_meja" value="<?php echo $datamejadankursi["no_meja"];?>" readonly></input>
-						</div>
-						<div class="form-control">
-							<label for="nama_pelanggan">Nama Pelanggan</label>
-							<input type="text" name="nama_pelanggan"></input>
-						</div>
-						<div class="form-control">
-							<label for="jml_pelanggan">Jumlah Pelanggan </label>
-							<input type="text" name="jml_pelanggan" id="jml"></input>
-						</div>
-				
-						<div class="simpan-control">
-							<input class="simpan" type="submit" value="Simpan No Meja" name="TblSimpan"></input>
-						</div>
+            <?php
+                if (isset($_POST["isi"])) { //biar bisa manggil no_meja readonly
+                    $db = dbConnect();
+                    $no_meja = $db->escape_string($_POST["no_meja"]);
+                    if ($datamejadankursi = getDataMejaDanKursi($no_meja)) {
+            ?>
+                        <div class="form-control">
+                            <label for="no_meja">No Meja</label>
+                            <input type="text" name="no_meja" value="<?php echo $datamejadankursi["no_meja"];?>" readonly></input>
+                        </div>
+                        <div class="form-control">
+                            <label for="nama_pelanggan">Nama Pelanggan</label>
+                            <input type="text" name="nama_pelanggan"></input>
+                        </div>
+                        <div class="form-control">
+                            <label for="jml_pelanggan">Jumlah Pelanggan </label>
+                            <input type="text" name="jml_pelanggan" id="jml"></input>
+                        </div>
+
+                        <div class="simpan-control">
+                            <input class="simpan" type="submit" value="Simpan No Meja" name="TblSimpan"></input>
+                        </div>
         </form>
-			<?php
-					} 
-				} 
-			?>
+            <?php
+                    }
+                }
+            ?>
     </div>
-	<script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
     <script>
         new AutoNumeric('#jml', { /* live format angka */
             decimalPlaces: '0',

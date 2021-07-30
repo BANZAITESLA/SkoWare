@@ -6,8 +6,7 @@
     <?php
         $db = dbConnect();
         if ($db->connect_errno == 0) {
-            $sql = "SELECT m.no_meja, m.status, p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan
-                    FROM meja_dan_kursi m LEFT JOIN pelanggan p ON m.id_pelanggan=p.id_pelanggan";
+            $sql = "SELECT m.no_meja, m.status, b.id_pesanan FROM meja_dan_kursi m LEFT JOIN pesanan b ON m.id_pesanan = b.id_pesanan";
             $res = $db->query($sql);
             if ($res) {
     ?>
@@ -15,7 +14,7 @@
                     <thead>
                         <tr>
                             <th width="60px">No Meja</th>
-                            <th width="50px">Id Pelanggan</th>
+                            <th width="50px">Id Pesanan</th>
                             <th width="70px">Status</th>
                             <th width="100px">Aksi</th>
                         </tr>
@@ -27,24 +26,24 @@
     ?>
                             <tr>
                                 <td align=center><?php echo $barisdata["no_meja"];?></td>
-                                <td align=center ><?php echo $barisdata["id_pelanggan"];?></td>
+                                <td align=center ><?php echo $barisdata["id_pesanan"];?></td>
                                 <td align=center class="status"><?php echo $barisdata["status"];?></td>
                                 <td align="center" width="70px">
                                     <form action="L014.php" method="post" class="form">
                                         <input type="hidden" name="no_meja" value="<?php echo $barisdata["no_meja"];?>"></input>
-                                        <input class="button" name="isi" type="submit" <?php echo ($barisdata["id_pelanggan"] != ""? "disabled style='background-color:#998F8F'" : "") ;?> value="Isi Meja">
+                                        <input class="button" name="isi" type="submit" <?php echo ($barisdata["id_pesanan"] != ""? "disabled style='background-color:#998F8F'" : "") ;?> value="Isi Meja">
                                     </form>
                                 </td>
                                 <td align="center" width="70px">
                                     <a href="#" id="kosong=<?php echo $barisdata["no_meja"];?>">
-                                        <button class="button" <?php echo ($barisdata["id_pelanggan"] == ""? "disabled style='background-color:#998F8F'" : "") ;?>>Kosongkan</button>
+                                        <button class="button" <?php echo ($barisdata["id_pesanan"] == ""? "disabled style='background-color:#998F8F'" : "") ;?>>Kosongkan</button>
                                     </a>
                                 </td>
                                 <td align="center" width="70px">
                                     <form action="L015.php" method="post" class="form">
                                         <input type="hidden" name="no_meja" value="<?php echo $barisdata["no_meja"];?>"></input>
-                                        <input type="hidden" name="id_pelanggan" value="<?php echo $barisdata["id_pelanggan"];?>"></input>
-                                        <input class="button" name="edit" type="submit" <?php echo ($barisdata["id_pelanggan"] == ""? "disabled style='background-color:#998F8F'" : "") ;?> value="Edit">
+                                        <input type="hidden" name="id_pelanggan" value="<?php echo $barisdata["id_pesanan"];?>"></input>
+                                        <input class="button" name="edit" type="submit" <?php echo ($barisdata["id_pesanan"] == ""? "disabled style='background-color:#998F8F'" : "") ;?> value="Edit">
                                     </form>
                                 </td>
                                 <td align="center" width="70px">
@@ -127,9 +126,7 @@
                 </table>
     <?php
                 $res->free();
-            } else
-                echo "Gagal Eksekusi SQL" . (DEVELOPMENT ? " : " . $db->error : "") . "<br>";
-        } else
-            echo "Gagal koneksi" . (DEVELOPMENT ? " : " . $db->connect_error : "") . "<br>";
+            }
+        }
     ?>
 </div>
