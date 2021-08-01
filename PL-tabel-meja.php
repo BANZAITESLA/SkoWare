@@ -42,7 +42,7 @@
                                 <td align="center" width="70px">
                                     <form action="L015.php" method="post" class="form">
                                         <input type="hidden" name="no_meja" value="<?php echo $barisdata["no_meja"];?>"></input>
-                                        <input type="hidden" name="id_pelanggan" value="<?php echo $barisdata["id_pesanan"];?>"></input>
+                                        <input type="hidden" name="id_pesanan" value="<?php echo $barisdata["id_pesanan"];?>"></input>
                                         <input class="button" name="edit" type="submit" <?php echo ($barisdata["id_pesanan"] == ""? "disabled style='background-color:#998F8F'" : "") ;?> value="Edit">
                                     </form>
                                 </td>
