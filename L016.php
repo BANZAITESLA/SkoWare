@@ -141,12 +141,12 @@
         </div>
         <div class="caridantambah">
             <div class="cari"> <!-- cari item -->
-                <input type="text" placeholder="Cari Waiting List" name="username">
+                <input type="text" placeholder="Cari Waiting List" id="cari">
                 <a href="#"><i class="fas fa-search"></i></a>
                 </input>
             </div>
             <div class="tambah"> <!-- button tambah -->
-                <a href="tambah-wl.php">Tambah Data</a>
+                <a href="PL-tambah-wl.php">Tambah Data</a>
             </div>
         </div>
         <div class="table">
@@ -161,12 +161,12 @@
                 <table cellspacing="0" cellpadding="5">
                     <thead>
                         <tr>
-                        <th width="100px">ID Pesanan</th>
-                        <th width="140px">Nama Pelanggan</th>
+                        <th width="130px">ID Pesanan</th>
+                        <th width="160px">Nama Pelanggan</th>
                         <th width="160px">Waktu</th>
-						<th width="160px">No Telepone</th> 
-						<th width="160px">Jumlah Pelanggan</th>
-                        <th width="160px">Aksi</th>
+						<th width="130px">No Telepone</th> 
+						<th width="100px">Jumlah Pelanggan</th>
+                        <th width="200px">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -176,7 +176,6 @@
     ?>
                             <tr>
                                 <td align=center><?php echo $barisdata["id_pesanan"];?></td>
-                                <td align=center ><?php echo $barisdata["id_pelanggan"];?></td>
                                 <td align=center ><?php echo $barisdata["nama_pelanggan"];?></td>
                                 <td align=center ><?php echo $barisdata["waktu_datang"];?></td>
                                 <td align=center ><?php echo $barisdata["no_telp"];?></td>
@@ -244,7 +243,7 @@
 
             function load_data(query) { /* ajax untuk menampilkan hasil table */
                 $.ajax({
-                    url:"PL-tabel-waitinglist.php",
+                    url:"L016.php",
                     method:"POST",
                     data:{query:query},
                     success:function(data) {
@@ -252,6 +251,16 @@
                     }
                 });
             }
+
+            $('#cari').keyup(function() { /* jquery ketika terdapat input cari */
+                var pencarian = $(this).val();
+                if(pencarian != '') {
+                    load_data(pencarian);
+                } else {
+                    load_data();
+                }
+            });
+            
         });
     </script>
   
