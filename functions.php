@@ -69,6 +69,27 @@
         } else
         return FALSE;
     } 
+    
+        function getDataPesanan($id_pesanan) {
+        $db = dbConnect();
+        if ($db->connect_errno == 0) {
+            $res = $db->query("SELECT  b.id_pesanan, b.tgl_bayar, b.waktu_datang, b.no_telp, b.total, 
+            p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan
+            FROM pesanan b LEFT JOIN pelanggan p ON b.id_pelanggan=p.id_pelanggan
+            WHERE id_pesanan='$id_pesanan'");
+            if ($res) {
+                if ($res->num_rows > 0) {
+                    $data = $res->fetch_assoc();
+                    $res->free();
+                    return $data;
+                } else
+                return FALSE;
+            } else
+            return FALSE;
+        } else
+        return FALSE;
+    } 
+
 
     function getDataMejaDanKursi($no_meja) {
         $db = dbConnect();
