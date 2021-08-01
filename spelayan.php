@@ -63,7 +63,7 @@
 
         .logout a{
             display: block;
-            margin: 115px 10px 20px 10px;
+            margin: 80px 10px 20px 10px;
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -86,8 +86,9 @@
                 <h1>Dashboard Pelayan</h1>
                 <div class="button"> <!-- isi button -->
                     <a href="L012.php">Pengaturan Meja</a>
+                    <a href="DetailPesanan.php">Detail Pesanan</a>
                     <a href="L016.php">Waiting List</a>
-                    <a href="L018.php">Pengantaran Pesanan</a>
+                    <a href="PL-Pengantaran-Pesanan.php">Pengantaran Pesanan</a>
                 </div>
 
                 <div class="logout">
