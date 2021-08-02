@@ -99,40 +99,33 @@
         </div>
 
         <form class="form" action="PL-simpan-wl.php" method="post">
-                         <div class="form-control">
-                            <label for="nama_pelanggan">Nama Pelanggan</label>
-                            <input type="text" name="nama_pelanggan"></input>
-                        </div>
-                        
-                        <div class="form-control">
-                            <label for="no_telp">No Telepone</label>
-                            <input type="text" name="no_telp"></input>
-                        </div>
-                        <div class="form-control">
-                            <input type="hidden" name="waktu_datang"></input>
-                        </div>
+            <div class="form-control">
+                <label for="nama_pelanggan">Nama Pelanggan</label>
+                <input type="text" name="nama_pelanggan"></input>
+            </div>
+            <div class="form-control">
+                <label for="no_telp">No Telepon</label>
+                <input type="number" name="no_telp"></input>
+            </div>
+            <div class="form-control">
+                <label for="waktu_datang">Tanggal Datang</label>
+                <input type="date" name="tanggal"></input>
+            </div>
+            <div class="form-control">
+                <label for="waktu_datang">Waktu Datang</label>
+                <input type="time" name="waktu"></input>
+            </div>
+            <div class="form-control">
+                <label for="jml_pelanggan">Jumlah Pelanggan </label>
+                <input type="text" name="jml_pelanggan"></input>
+            </div>
 
-
-                        <div class="form-control">
-                            <label for="jml_pelanggan">Jumlah Pelanggan </label>
-                            <input type="text" name="jml_pelanggan"></input>
-                        </div>
-
-                        <div class="simpan-control">
-                            <input class="simpan" type="submit" value="Simpan Waiting List" name="TblSimpan"></input>
-                        </div>
+            <div class="simpan-control">
+                <input class="simpan" type="submit" value="Simpan Waiting List" name="TblSimpan"></input>
+            </div>
         </form>
             
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
-    <script>
-        new AutoNumeric('#jml', { /* live format angka */
-            decimalPlaces: '0',
-            decimalCharacter: ',',
-            digitGroupSeparator: '.',
-            minimumValue : '0'
-        })
-    </script>
 </body>
 </html>
 <script src="dist/sweetalert2.all.min.js"></script>

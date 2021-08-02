@@ -33,7 +33,7 @@
             letter-spacing: 10px;
         }
         .form {
-            margin-top: 40px;
+            margin-top: 10px;
             width: 100%;
         }
         .form-control {
@@ -101,40 +101,51 @@
         </div>      
         
         <form class="form" action="PL-update-editwl.php" method="post">
-        <?php
-            if (isset($_POST["edit"]) or (isset($_GET["error"]))) { /* agar ketika error kembali ke form edit dgn id yg sama */
-                $db=dbConnect();
-                
-                if (isset($_POST["edit"])) {
-                    $id_pesanan = $db->escape_string($_POST['id_pesanan']);
-                } else if ($_GET["error"]){
-                    $subid_pesanan = substr($_GET["error"], 0, -1); /* manipulasi link error untuk mendapatkan id */
-                    $id_pesanan = $db->escape_string($subid_pesanan);
-                }
-				
-                if($datapesanan=getDataPesanan($id_pesanan)){
-        ?>
-					
-					<div class="form-control">
-						<label for="nama_pelanggan">Nama Pelanggan</label>
-						<input type="text" name="nama_pelanggan" value="<?php echo $datapesanan["nama_pelanggan"];?>"></input>
-					</div>
-                    <div class="form-control">
-						<label for="no_telp">No Telephone</label>
-						<input type="text" name="no_telp" value="<?php echo $datapesanan["no_telp"];?>"></input>
-					</div>
-					<div class="form-control">
-						<label for="jml_pelanggan">Jumlah Pelanggan </label>
-						<input type="text" name="jml_pelanggan" value="<?php echo $datapesanan["jml_pelanggan"];?>"></input>
-					</div>
+            <?php
+                if (isset($_GET["id_pesanan"]) or (isset($_GET["error"]))) { /* agar ketika error kembali ke form edit dgn id yg sama */
+                    $db=dbConnect();
+                    
+                    if (isset($_GET["id_pesanan"])) {
+                        $id_pesanan = $db->escape_string($_GET['id_pesanan']);
+                    } else if ($_GET["error"]){
+                        $subid_pesanan = substr($_GET["error"], 0, -1); /* manipulasi link error untuk mendapatkan id */
+                        $id_pesanan = $db->escape_string($subid_pesanan);
+                    }
+                    
+                    if($datapesanan=getDataPesanan($id_pesanan)){
+            ?>
+                        <div class="form-control">
+                            <label for="nama_pelanggan">ID Pesanan</label>
+                            <input type="text" name="id_pesanan" value="<?php echo $datapesanan["id_pesanan"];?>" readonly></input>
+                        </div>
+                        <div class="form-control">
+                            <label for="nama_pelanggan">Nama Pelanggan</label>
+                            <input type="text" name="nama_pelanggan" value="<?php echo $datapesanan["nama_pelanggan"];?>"></input>
+                        </div>
+                        <div class="form-control">
+                            <label for="no_telp">No Telepon</label>
+                            <input type="number" name="no_telp" value="<?php echo $datapesanan["no_telp"];?>"></input>
+                        </div>
+                        <div class="form-control">
+                            <label for="waktu_datang">Tanggal Datang</label>
+                            <input type="date" name="tanggal" value="<?php echo $datapesanan["tanggal"];?>"></input>
+                        </div>
+                        <div class="form-control">
+                            <label for="waktu_datang">Waktu Datang</label>
+                            <input type="time" name="waktu" value="<?php echo $datapesanan["waktu"];?>"></input>
+                        </div>
+                        <div class="form-control">
+                            <label for="jml_pelanggan">Jumlah Pelanggan </label>
+                            <input type="text" name="jml_pelanggan" value="<?php echo $datapesanan["jml_pelanggan"];?>"></input>
+                        </div>
 
-					<div class="simpan-control">
-						<input class="simpan" type="submit" value="Simpan Data" name="TblUpdate"></input>
-					</div>
-		</form>
-        <?php
-				}
-            }
+                        <div class="simpan-control">
+                            <input class="simpan" type="submit" value="Simpan Waiting List" name="TblUpdate"></input>
+                        </div>
+        </form>
+            <?php
+                    }
+                }
         ?>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
