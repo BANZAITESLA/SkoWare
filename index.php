@@ -14,6 +14,14 @@
             background-color: #F5F5F5;
         }
         .isi {
+            position: absolute;
+            display: block;
+            top: 155px;
+            left: 29%;
+            width: 67vw;
+            height: 35vw;
+        }
+        .judul {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,36 +31,16 @@
             font-size: 24px;
             letter-spacing: 10px;
         }
-        .list{
-            position: absolute;
-            top: 155px;
-            left: 29%;
-            width: 67vw;
-            height: 35vw;
+        .ket {
+            margin-top: 20px;
         }
-        .tgl {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
+        .ket td {
+            background-color: #F5F5F5;
             font-weight: bold;
-        }
-        .atasnama {
-            display: flex;
-            font-weight: bold;
-            margin-left: 50%;
-        }
-        .b1 {
-            display: flex;
-            flex-direction: row;
-            margin-top:20px;
-        }
-        .b2 {
-            display: flex;
-            flex-direction: row;
-            margin-top:10px;
         }
         .table {
-            margin-top: 15px;
+            position: absolute;
+            display: block;
         }
         thead, tr {
             display:table;
@@ -62,7 +50,7 @@
         tbody {
             display:block;
             overflow-y:auto;
-            max-height:20vw; /* ubah untuk menyesuaikan tinggi tabel */
+            max-height:21vw; /* ubah untuk menyesuaikan tinggi tabel */
             width: 100%;
         }
         th {
@@ -72,25 +60,11 @@
         td {
             height: 30px;
         }
-        tr:nth-child(odd) {
+        tr:nth-of-type(odd) {
             background : #C4C4C4;
         }
-        tr:nth-child(even) {
+        tr:nth-of-type(even) {
             background : white;
-        }
-        td button {
-            padding: 3px;
-            width: 50px;
-
-            background-color: #6A6363;
-            border-radius: 10px;
-            border: 0 solid;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-
-            text-decoration: none;
-            color: white;
-            font-family: inherit;
-            font-size: 12px;
         }
         .form {
             margin-top: 40px;
@@ -127,15 +101,16 @@
     </style>
 </head>
 <body>
-    <div class="list">
-        <div class="isi">
+    <div class="isi">
+        <div class="judul">
             CEK LIST PESANAN
         </div>
         <div class="form-control">
             <input id="id" type="text" name="id"  placeholder="Input ID Pesanan Anda">
             <input id="cek" class="simpan" name="cek" type="submit" value="Cek">
         </div>
-            <div class="table" id="table"> <!-- table --></div>
+        
+        <div class="table" id="table"> <!-- table --></div>
     </div>
     <script>
         $('#cek').click(function(){
