@@ -69,14 +69,12 @@
         } else
         return FALSE;
     } 
-    
-        function getDataPesanan($id_pesanan) {
+
+    function getDataMejaDanKursi($no_meja) {
         $db = dbConnect();
         if ($db->connect_errno == 0) {
-            $res = $db->query("SELECT  b.id_pesanan, b.tgl_bayar, b.waktu_datang, b.no_telp, b.total, 
-            p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan
-            FROM pesanan b LEFT JOIN pelanggan p ON b.id_pelanggan=p.id_pelanggan
-            WHERE id_pesanan='$id_pesanan'");
+            $res = $db->query("SELECT m.no_meja, m.status, b.id_pesanan, b.tgl_bayar, b.waktu_datang, b.no_telp, b.total, p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan 
+                                FROM meja_dan_kursi m LEFT JOIN pesanan b ON m.id_pesanan=b.id_pesanan LEFT JOIN pelanggan p ON p.id_pelanggan = b.id_pelanggan WHERE m.no_meja = $no_meja");
             if ($res) {
                 if ($res->num_rows > 0) {
                     $data = $res->fetch_assoc();
@@ -88,14 +86,12 @@
             return FALSE;
         } else
         return FALSE;
-    } 
+    }
 
-
-    function getDataMejaDanKursi($no_meja) {
+    function getDetail($meja, $menu) {
         $db = dbConnect();
         if ($db->connect_errno == 0) {
-            $res = $db->query("SELECT m.no_meja, m.status, b.id_pesanan, b.tgl_bayar, b.waktu_datang, b.no_telp, b.total, p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan 
-                                FROM meja_dan_kursi m LEFT JOIN pesanan b ON m.id_pesanan=b.id_pesanan LEFT JOIN pelanggan p ON p.id_pelanggan = b.id_pelanggan WHERE m.no_meja = $no_meja");
+            $res = $db->query("SELECT * FROM detail_pesanan, meja_dan_kursi, menu_minuman WHERE no_meja = '$meja' AND meja_dan_kursi.id_pesanan = detail_pesanan.id_pesanan AND detail_pesanan.id_menu = '$menu' AND detail_pesanan.id_menu = menu_minuman.id_menu");
             if ($res) {
                 if ($res->num_rows > 0) {
                     $data = $res->fetch_assoc();
