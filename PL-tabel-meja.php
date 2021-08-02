@@ -13,10 +13,10 @@
                 <table cellspacing="0" cellpadding="5">
                     <thead>
                         <tr>
-                            <th width="60px">No Meja</th>
-                            <th width="50px">Id Pesanan</th>
-                            <th width="70px">Status</th>
-                            <th width="100px">Aksi</th>
+                            <th width="">No Meja</th>
+                            <th width="">Id Pesanan</th>
+                            <th width="91px">Status</th>
+                            <th width="503px">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,28 +25,33 @@
                         foreach ($data as $barisdata) { // telusuri satu per satu
     ?>
                             <tr>
-                                <td align=center><?php echo $barisdata["no_meja"];?></td>
-                                <td align=center ><?php echo $barisdata["id_pesanan"];?></td>
-                                <td align=center class="status"><?php echo $barisdata["status"];?></td>
-                                <td align="center" width="70px">
+                                <td align=center width="60px"><?php echo $barisdata["no_meja"];?></td>
+                                <td align=center width="60px"><?php echo $barisdata["id_pesanan"];?></td>
+                                <td align=center class="status" width="50px"><?php echo $barisdata["status"];?></td>
+                                <td align="center" width="50px">
                                     <form action="L014.php" method="post" class="form">
                                         <input type="hidden" name="no_meja" value="<?php echo $barisdata["no_meja"];?>"></input>
                                         <input class="button" name="isi" type="submit" <?php echo ($barisdata["id_pesanan"] != ""? "disabled style='background-color:#998F8F'" : "") ;?> value="Isi Meja">
                                     </form>
                                 </td>
-                                <td align="center" width="70px">
+                                <td align="center" width="50px">
                                     <a href="#" id="kosong=<?php echo $barisdata["no_meja"];?>">
                                         <button class="button" <?php echo ($barisdata["id_pesanan"] == ""? "disabled style='background-color:#998F8F'" : "") ;?>>Kosongkan</button>
                                     </a>
                                 </td>
-                                <td align="center" width="70px">
+                                <td align="center" width="50px">
+                                    <a href="L01baru.php?meja=<?php echo $barisdata["no_meja"];?>">
+                                        <button class="button" <?php echo ($barisdata["id_pesanan"] == ""? "disabled style='background-color:#998F8F'" : "") ;?>>Pesanan</button>
+                                    </a>
+                                </td>
+                                <td align="center" width="50px">
                                     <form action="L015.php" method="post" class="form">
                                         <input type="hidden" name="no_meja" value="<?php echo $barisdata["no_meja"];?>"></input>
                                         <input type="hidden" name="id_pesanan" value="<?php echo $barisdata["id_pesanan"];?>"></input>
                                         <input class="button" name="edit" type="submit" <?php echo ($barisdata["id_pesanan"] == ""? "disabled style='background-color:#998F8F'" : "") ;?> value="Edit">
                                     </form>
                                 </td>
-                                <td align="center" width="70px">
+                                <td align="center" width="50px">
                                     <a href="#" id="hapus=<?php echo $barisdata["no_meja"];?>">
                                         <button class="button">Hapus</button>
                                     </a>

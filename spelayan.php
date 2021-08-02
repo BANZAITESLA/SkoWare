@@ -44,10 +44,6 @@
             width: 20%;
             bottom: 60px;
         }
-
-
-       
-
         .pemesananselesai  {
             display: block;
             width: 15%;
@@ -60,10 +56,9 @@
             font-size: 18px;
             text-align: center;
         }
-
         .logout a{
             display: block;
-            margin: 80px 10px 20px 10px;
+            margin: 115px 10px 20px 10px;
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -74,52 +69,31 @@
             font-weight: bold;
             font-size: 18px;
         }
-        
-       
     </style>
 </head>
 <body>
     <?php
         function sidebar() {
     ?>
-            <div class="sidebar"> <!-- bagian sidebar -->
-                <h1>Dashboard Pelayan</h1>
-                <div class="button"> <!-- isi button -->
-                    <a href="L012.php">Pengaturan Meja</a>
-                    <a href="DetailPesanan.php">Detail Pesanan</a>
-                    <a href="L016.php">Waiting List</a>
-                    <a href="PL-Pengantaran-Pesanan.php">Pengantaran Pesanan</a>
-                </div>
-
-                <div class="logout">
-                    <a href="logout.php">Logout</a>
-                </div>
-
-                <div class="creator"> <!-- tulisan creator -->
-                     <?php
-                        creator();
-                    ?>
-                </div>
+        <div class="sidebar"> <!-- bagian sidebar -->
+            <h1>Dashboard Pelayan</h1>
+            <div class="button"> <!-- isi button -->
+                <a href="L012.php">Pengaturan Meja</a>
+                <a href="L016.php">Waiting List</a>
+                <a href="PL-Pengantaran-Pesanan.php">Pengantaran Pesanan</a>
             </div>
-            </div>  
+
+            <div class="logout">
+                <a href="logout.php">Logout</a>
+            </div>
+
+            <div class="creator"> <!-- tulisan creator -->
+                    <?php
+                    creator();
+                ?>
+            </div>
+        </div> 
     <?php } ;?>
-     
-
-   
-
-    <?php
-        function pemesananselesai() {
-    ?>
-        <div class="pemesananselesai"> <!-- bagian pemesanan selesai -->
-                <div class="button"> <!-- isi button -->
-                    <a href="L012.php">01</a>
-                    <a href="L012.php">02</a>
-                </div>
-        </div>
-    <?php } ;?>
-
-    
-    
 </body>
 <script src="https://kit.fontawesome.com/50adeae078.js" crossorigin="anonymous"></script>
 <script src="dist/sweetalert2.all.min.js"></script>
