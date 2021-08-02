@@ -25,7 +25,7 @@
                     } else if($parse == 'PL'){
                         $url = 'L012.php'; /* dashboard pelanggan */
                     } else {
-                        $url = ''; /* dashboard pemilik*/
+                        $url = 'OW-lapor-minggu.php'; /* dashboard pemilik*/
                     }
                     redirect($url);
                     
