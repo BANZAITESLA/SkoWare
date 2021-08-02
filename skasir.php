@@ -67,7 +67,7 @@
 
                 <div class="button"> <!-- isi button -->
                     <a href="pembayaran.php">Pembayaran Minuman</a>
-                    <a href="listmenu.php">Laporan Keuangan</a>
+                    <a href="KS-laporan.php">Laporan Keuangan</a>
                 </div>
 
                 <div class="logout">

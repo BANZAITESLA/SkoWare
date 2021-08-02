@@ -127,7 +127,7 @@
                     if(isset($_GET['pesan'])) { /* ketika ada input cari */
                         $pesan = $_GET["pesan"]; 
                         $meja = $_GET["meja"];
-                        $total = "UPDATE pesanan SET total = (SELECT SUM(sub_total) FROM detail_pesanan WHERE id_pesanan = '$pesan') WHERE id_pesanan = '$pesan'";
+                        $total = "UPDATE pesanan SET total = (SELECT SUM(sub_total) FROM detail_pesanan WHERE id_pesanan = '$pesan'), tgl_bayar = CURRENT_TIMESTAMP WHERE id_pesanan = '$pesan'";
                         $hapus = "DELETE FROM detail_pesanan WHERE qty = 0 AND id_pesanan = '$pesan'";
                         $sql = "SELECT detail_pesanan.id_menu, nama_menu, harga_item, qty, sub_total FROM detail_pesanan, menu_minuman WHERE detail_pesanan.id_menu = menu_minuman.id_menu AND detail_pesanan.id_pesanan = '$pesan'";
                         $restotal = $db->query($total);
