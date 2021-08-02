@@ -103,7 +103,10 @@ $db = dbConnect();
                             <label for="no_meja">No Meja</label>
                             <input type="text" name="no_meja" id="no" value="<?php echo $detail["no_meja"]?>" readonly></input>
                         </div>
-
+                        <div class="form-control">
+                            <label for="id_pesanan">ID Pesanan</label>
+                            <input type="text" name="id_pesanan" id="no" value="<?php echo $detail["id_pesanan"]?>" readonly></input>
+                        </div>
                         <div class="form-control">
                             <label for="id_menu">ID Menu</label>
                             <input type="text" name="id_menu" value="<?php echo $detail["id_menu"]?>" readonly></input>
@@ -121,11 +124,11 @@ $db = dbConnect();
 
                         <div class="form-control">
                             <label for="qty">Qty</label>
-                            <input type="number" name="qty" min="0" max="<?php echo $detail["stok"]?>"value="<?php echo $detail["qty"]?>"></input>
+                            <input type="number" name="qty" min="0" max="<?php echo $detail["stok"]?>"></input>
                         </div>
 
                         <div class="simpan-control">
-                            <input class="simpan" type="submit" value="Tambah" name="tambah"></input>
+                            <input class="simpan" type="submit" value="Tambah" name="<?php echo ($_GET["qty"] == 0 ? "tambah":"update");?>"></input>
                         </div>
                     </form>
             </div>

@@ -194,7 +194,7 @@ $db = dbConnect();
                                             <td align="center" width="100px"><?php echo $barisdata["id_menu"]; ?></td>
                                             <td><?php echo $barisdata["nama_menu"]; ?></td>
                                             <td align="center" width="70px"><?php echo $barisdata["qty"]; ?></td>
-                                            <td align="center" width="70px"><a href="L01baru-qty.php?no=<?php echo $meja;?>&menu=<?php echo $barisdata["id_menu"]; ?>"><button>Tambah</button></a></td>
+                                            <td align="center" width="70px"><a href="L01baru-qty.php?no=<?php echo $meja;?>&menu=<?php echo $barisdata["id_menu"];?>&qty=<?php echo $barisdata["qty"]; ?>"><button>Tambah</button></a></td>
                                         </tr>
                             <?php
                                     }
