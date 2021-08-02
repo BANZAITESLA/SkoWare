@@ -3,7 +3,8 @@
     $db = dbConnect();
 
     if($db->connect_errno==0){ /* ketika koneksi db success */
-        $sql = "SELECT * FROM detail_pesanan, menu_minuman WHERE detail_pesanan.id_menu = menu_minuman.id_menu AND `status` = 'Belum' AND qty > 0";
+        $status = 'Selesai';
+        $sql = "SELECT * FROM detail_pesanan, meja_dan_kursi, menu_minuman WHERE detail_pesanan.id_pesanan = meja_dan_kursi.id_pesanan AND menu_minuman.id_menu = detail_pesanan.id_menu AND detail_pesanan.`status` = 'Selesai'";
         $res=$db->query($sql);
         $no = 1;
         if($res) {
@@ -14,7 +15,7 @@
                     <div class="tulisan">
                         <div class="isi-menu">
                             <button id="<?php echo $no;?>">
-                                ID Pesanan : <?php echo $barisdata["id_pesanan"];?><br>
+                                No Meja : <?php echo $barisdata["no_meja"];?><br>
                                 <strong><?php echo $barisdata["nama_menu"];?></strong><br>
                                 Qty : <?php echo $barisdata["qty"];?>
                             </button>
@@ -27,7 +28,7 @@
                         Swal.fire({ /* validasi hapus data */
                             icon : 'question',
                             title : 'Konfirmasi',
-                            text : 'Pesanan sudah Selesai?',
+                            text : 'Pesanan sudah diantar?',
                             confirmButtonText: 'Ya',
                             confirmButtonColor: '#DA4453',
                             showCancelButton : true,
@@ -38,7 +39,7 @@
                                 $(function(){
                                     $.ajax ({ /* ajax hapus sesuai id menu */
                                         type: 'POST',
-                                        url : "KK-detail-pesan.php?id_menu=<?php echo $barisdata["id_menu"];?>&pesan=<?php echo $barisdata["id_pesanan"];?>"
+                                        url : "PL-konfir-kirim.php?id_menu=<?php echo $barisdata["id_menu"];?>&pesan=<?php echo $barisdata["id_pesanan"];?>"
                                     })
                                 })
                                 Swal.fire({
