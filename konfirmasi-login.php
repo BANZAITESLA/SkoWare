@@ -21,9 +21,9 @@
                     if ($parse == 'KK') {
                         $url = 'dkoki.php'; /* dashboard koki */
                     } else if($parse == 'KS'){
-                        $url = ''; /* dashboard kasir */
+                        $url = 'pembayaran.php'; /* dashboard kasir */
                     } else if($parse == 'PL'){
-                        $url = 'L012.php'; /* dashboard pelayan */
+                        $url = 'L012.php'; /* dashboard pelanggan */
                     } else {
                         $url = ''; /* dashboard pemilik*/
                     }
