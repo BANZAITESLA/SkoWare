@@ -80,7 +80,7 @@
             <div class="button"> <!-- isi button -->
                 <a href="L012.php">Pengaturan Meja</a>
                 <a href="L016.php">Waiting List</a>
-                <a href="PL-Pengantaran-Pesanan.php">Pengantaran Pesanan</a>
+                <a href="L018.php">Pengantaran Pesanan</a>
             </div>
 
             <div class="logout">
