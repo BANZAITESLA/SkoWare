@@ -88,6 +88,40 @@
         return FALSE;
     }
 
+    function getMejaKosong() {
+        $db = dbConnect();
+        if ($db->connect_errno == 0) {
+            $res = $db->query("SELECT * FROM meja_dan_kursi WHERE id_pesanan IS NULL AND `status` = 'Tersedia'");
+            if ($res) {
+                if ($res->num_rows > 0) {
+                    $data=$res->fetch_all(MYSQLI_ASSOC);
+                    $res->free();
+                    return $data;
+                } else
+                return FALSE;
+            } else
+            return FALSE;
+        } else
+        return FALSE;
+    }
+
+    function getDataPesanan($id_pesanan) {
+        $db = dbConnect();
+        if ($db->connect_errno == 0) {
+            $res = $db->query("SELECT b.id_pesanan, b.tgl_bayar, CAST(b.waktu_datang AS DATE) AS tanggal, DATE_FORMAT(b.waktu_datang,'%H:%i:%s') waktu, b.no_telp, b.total, p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan FROM pesanan b LEFT JOIN pelanggan p ON b.id_pelanggan=p.id_pelanggan WHERE id_pesanan='$id_pesanan'");
+            if ($res) {
+                if ($res->num_rows > 0) {
+                    $data = $res->fetch_assoc();
+                    $res->free();
+                    return $data;
+                } else
+                return FALSE;
+            } else
+            return FALSE;
+        } else
+        return FALSE;
+    }
+
     function getDetail($meja, $menu) {
         $db = dbConnect();
         if ($db->connect_errno == 0) {
