@@ -139,6 +139,23 @@
         return FALSE;
     }
 
+    function getStatus($pesan, $menu) {
+        $db = dbConnect();
+        if ($db->connect_errno == 0) {
+            $res = $db->query("SELECT `status` FROM detail_pesanan WHERE id_pesanan = '$pesan' AND id_menu = '$menu'");
+            if ($res) {
+                if ($res->num_rows > 0) {
+                    $data = $res->fetch_assoc();
+                    $res->free();
+                    return $data;
+                } else
+                return FALSE;
+            } else
+            return FALSE;
+        } else
+        return FALSE;
+    }
+
         function redirect($url) { /* function untuk redirect url jika header tidak berfungsi */
             if (!headers_sent())
             {    
