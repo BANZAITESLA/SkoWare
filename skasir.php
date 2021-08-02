@@ -41,7 +41,7 @@
         }
         .logout a{
             display: block;
-            margin: 115px 10px 20px 10px;
+            margin: 200px 10px 20px 10px;
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -66,8 +66,7 @@
                 <h1>Dashboard Kasir</h1>
 
                 <div class="button"> <!-- isi button -->
-                    <a href="listpesananpl.php">Pesanan Minuman</a>
-                    <a href="waitinglist.php">Pesanan Waiting List</a>
+                    <a href="pembayaran.php">Pembayaran Minuman</a>
                     <a href="listmenu.php">Laporan Keuangan</a>
                 </div>
 
