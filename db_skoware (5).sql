@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Agu 2021 pada 00.21
+-- Waktu pembuatan: 07 Agu 2021 pada 15.53
 -- Versi server: 10.4.18-MariaDB
 -- Versi PHP: 7.4.16
 
@@ -35,23 +35,6 @@ CREATE TABLE `detail_pesanan` (
   `status` enum('Selesai','Belum','Sampai','Gagal') NOT NULL DEFAULT 'Belum'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `detail_pesanan`
---
-
-INSERT INTO `detail_pesanan` (`id_pesanan`, `id_menu`, `qty`, `sub_total`, `status`) VALUES
-(8, 'MM001', 1, 10000, 'Sampai'),
-(9, 'MM001', 1, 10000, 'Sampai'),
-(9, 'MM002', 2, 20000, 'Sampai'),
-(14, 'MM001', 3, 30000, 'Sampai'),
-(14, 'MM002', 1, 10000, 'Sampai'),
-(14, 'MM003', 3, 30000, 'Selesai'),
-(15, 'MM002', 3, 30000, 'Belum'),
-(15, 'MM001', 2, 20000, 'Belum'),
-(15, 'MM004', 2, 20000, 'Sampai'),
-(15, 'MM002', 3, 30000, 'Belum'),
-(14, 'MM003', 1, 10000, 'Selesai');
-
 -- --------------------------------------------------------
 
 --
@@ -63,20 +46,6 @@ CREATE TABLE `meja_dan_kursi` (
   `status` enum('Tersedia','Penuh') DEFAULT NULL,
   `id_pesanan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `meja_dan_kursi`
---
-
-INSERT INTO `meja_dan_kursi` (`no_meja`, `status`, `id_pesanan`) VALUES
-(1, 'Tersedia', NULL),
-(3, 'Penuh', 13),
-(4, 'Tersedia', NULL),
-(5, 'Tersedia', NULL),
-(6, 'Tersedia', NULL),
-(7, 'Penuh', 11),
-(8, 'Tersedia', NULL),
-(9, 'Tersedia', NULL);
 
 -- --------------------------------------------------------
 
@@ -98,11 +67,11 @@ CREATE TABLE `menu_minuman` (
 --
 
 INSERT INTO `menu_minuman` (`id_menu`, `nama_menu`, `harga_item`, `stok`, `gambar`, `id_pegawai`) VALUES
-('MM001', 'Boba Sekoteng', 10000, 40, 'boba sekoteng.png', 'KK001'),
-('MM002', 'Sekoteng Jahe', 10000, 41, 'Sekoteng Jahe.jpeg', 'KK001'),
-('MM003', 'Sekoteng Bangkok', 10000, 46, 'Sekoteng Bangkok.jpg', 'KK001'),
-('MM004', 'Sekoteng Jahe Madu', 10000, 44, 'Sekoteng Jahe Madu2.jpg', 'KK001'),
-('MM005', 'Sekoteng Spesial', 15000, 50, 'Sekoteng Spesial.jpeg', 'KK001');
+('MM001', 'Boba Sekoteng', 10000, 39, 'boba sekoteng.png', 'KK001'),
+('MM002', 'Sekoteng Jahe', 10000, 21, 'Sekoteng Jahe.jpeg', 'KK001'),
+('MM003', 'Sekoteng Bangkok', 10000, 43, 'Sekoteng Bangkok.jpg', 'KK001'),
+('MM004', 'Sekoteng Jahe Madu', 10000, 40, 'Sekoteng Jahe Madu2.jpg', 'KK001'),
+('MM005', 'Sekoteng Spesial', 15000, 43, 'Sekoteng Spesial.jpeg', 'KK001');
 
 -- --------------------------------------------------------
 
@@ -141,20 +110,6 @@ CREATE TABLE `pelanggan` (
   `jml_pelanggan` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `pelanggan`
---
-
-INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `jml_pelanggan`) VALUES
-(27, 'Dea', 2),
-(28, 'Siapa aja', 3),
-(29, 'Tebak', 1),
-(30, 'galatic', 3),
-(31, 'SORROW', 1),
-(32, 'orenjii', 6),
-(33, 'Dea', 1),
-(34, 'Dea mulu', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -164,24 +119,11 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `jml_pelanggan`) VALU
 CREATE TABLE `pesanan` (
   `id_pesanan` int(11) NOT NULL,
   `id_pelanggan` int(11) DEFAULT NULL,
-  `tgl_bayar` date DEFAULT current_timestamp(),
+  `tgl_bayar` datetime DEFAULT NULL,
   `waktu_datang` datetime DEFAULT NULL,
-  `no_telp` int(12) DEFAULT NULL,
+  `no_telp` varchar(12) DEFAULT NULL,
   `total` double DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `pesanan`
---
-
-INSERT INTO `pesanan` (`id_pesanan`, `id_pelanggan`, `tgl_bayar`, `waktu_datang`, `no_telp`, `total`) VALUES
-(8, 27, NULL, NULL, 9876, 10000),
-(9, 28, NULL, NULL, 9876, 30000),
-(11, 30, '2021-08-02', NULL, 19876, NULL),
-(12, 31, NULL, '2021-03-03 12:00:00', 98765, 0),
-(13, 32, '2021-08-02', NULL, NULL, NULL),
-(14, 33, '2021-08-02', NULL, NULL, 80000),
-(15, 34, '2021-08-02', NULL, 98765, 100000);
 
 --
 -- Indexes for dumped tables
@@ -235,13 +177,13 @@ ALTER TABLE `pesanan`
 -- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
