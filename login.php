@@ -89,11 +89,13 @@
         if (isset($_GET["error"])) { /* jika login error, panggil function js */
             $error = $_GET["error"];
             if ($error == 1) {
-                echo '<script type="text/javascript">','loginsalah();','</script>';
-            } else if ($error == 2) {
-                echo '<script type="text/javascript">','logindulu();','</script>';
-            } else if ($error == 3) {
                 echo '<script type="text/javascript">','dberror();','</script>';
+            } else if ($error == 2) {
+                echo '<script type="text/javascript">','loginsalah();','</script>';
+            } else if ($error == 3) {
+                echo '<script type="text/javascript">','logindulu();','</script>';
+            } else if ($error == 4) {
+                echo '<script type="text/javascript">','inputkosong();','</script>';
             } else{
                 echo '<script type="text/javascript">','unknownerror();','</script>';
             }
@@ -114,7 +116,7 @@
                 <input type="password" placeholder="Masukan Password Anda" name="password"></input>
             </div>
             <div class="masuk-control">
-                <input class="masuk" type="submit" value="Masuk" name="masuk"></input>
+                <input class="masuk" type="submit" accesskey="l" value="Masuk" name="masuk"></input>
             </div>
         </form>
 </body>

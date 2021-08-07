@@ -53,108 +53,108 @@
         }
         
         function getDataPelanggan($id_pelanggan) {
-        $db = dbConnect();
-        if ($db->connect_errno == 0) {
-            $res = $db->query("SELECT  id_pelanggan, nama_pelanggan, jml_pelanggan FROM pelanggan 
-            WHERE id_pelanggan='$id_pelanggan'");
-            if ($res) {
-                if ($res->num_rows > 0) {
-                    $data = $res->fetch_assoc();
-                    $res->free();
-                    return $data;
+            $db = dbConnect();
+            if ($db->connect_errno == 0) {
+                $res = $db->query("SELECT  id_pelanggan, nama_pelanggan, jml_pelanggan FROM pelanggan 
+                WHERE id_pelanggan='$id_pelanggan'");
+                if ($res) {
+                    if ($res->num_rows > 0) {
+                        $data = $res->fetch_assoc();
+                        $res->free();
+                        return $data;
+                    } else
+                    return FALSE;
                 } else
                 return FALSE;
             } else
             return FALSE;
-        } else
-        return FALSE;
-    } 
+        } 
 
-    function getDataMejaDanKursi($no_meja) {
-        $db = dbConnect();
-        if ($db->connect_errno == 0) {
-            $res = $db->query("SELECT m.no_meja, m.status, b.id_pesanan, b.tgl_bayar, b.waktu_datang, b.no_telp, b.total, p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan 
-                                FROM meja_dan_kursi m LEFT JOIN pesanan b ON m.id_pesanan=b.id_pesanan LEFT JOIN pelanggan p ON p.id_pelanggan = b.id_pelanggan WHERE m.no_meja = $no_meja");
-            if ($res) {
-                if ($res->num_rows > 0) {
-                    $data = $res->fetch_assoc();
-                    $res->free();
-                    return $data;
+        function getDataMejaDanKursi($no_meja) {
+            $db = dbConnect();
+            if ($db->connect_errno == 0) {
+                $res = $db->query("SELECT m.no_meja, m.status, b.id_pesanan, b.tgl_bayar, b.waktu_datang, b.no_telp, b.total, p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan 
+                                    FROM meja_dan_kursi m LEFT JOIN pesanan b ON m.id_pesanan=b.id_pesanan LEFT JOIN pelanggan p ON p.id_pelanggan = b.id_pelanggan WHERE m.no_meja = $no_meja");
+                if ($res) {
+                    if ($res->num_rows > 0) {
+                        $data = $res->fetch_assoc();
+                        $res->free();
+                        return $data;
+                    } else
+                    return FALSE;
                 } else
                 return FALSE;
             } else
             return FALSE;
-        } else
-        return FALSE;
-    }
+        }
 
-    function getMejaKosong() {
-        $db = dbConnect();
-        if ($db->connect_errno == 0) {
-            $res = $db->query("SELECT * FROM meja_dan_kursi WHERE id_pesanan IS NULL AND `status` = 'Tersedia'");
-            if ($res) {
-                if ($res->num_rows > 0) {
-                    $data=$res->fetch_all(MYSQLI_ASSOC);
-                    $res->free();
-                    return $data;
+        function getMejaKosong() {
+            $db = dbConnect();
+            if ($db->connect_errno == 0) {
+                $res = $db->query("SELECT * FROM meja_dan_kursi WHERE id_pesanan IS NULL AND `status` = 'Tersedia'");
+                if ($res) {
+                    if ($res->num_rows > 0) {
+                        $data=$res->fetch_all(MYSQLI_ASSOC);
+                        $res->free();
+                        return $data;
+                    } else
+                    return FALSE;
                 } else
                 return FALSE;
             } else
             return FALSE;
-        } else
-        return FALSE;
-    }
+        }
 
-    function getDataPesanan($id_pesanan) {
-        $db = dbConnect();
-        if ($db->connect_errno == 0) {
-            $res = $db->query("SELECT b.id_pesanan, b.tgl_bayar, CAST(b.waktu_datang AS DATE) AS tanggal, DATE_FORMAT(b.waktu_datang,'%H:%i:%s') waktu, b.no_telp, b.total, p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan FROM pesanan b LEFT JOIN pelanggan p ON b.id_pelanggan=p.id_pelanggan WHERE id_pesanan='$id_pesanan'");
-            if ($res) {
-                if ($res->num_rows > 0) {
-                    $data = $res->fetch_assoc();
-                    $res->free();
-                    return $data;
+        function getDataPesanan($id_pesanan) {
+            $db = dbConnect();
+            if ($db->connect_errno == 0) {
+                $res = $db->query("SELECT b.id_pesanan, b.tgl_bayar, CAST(b.waktu_datang AS DATE) AS tanggal, DATE_FORMAT(b.waktu_datang,'%H:%i:%s') waktu, b.no_telp, b.total, p.id_pelanggan, p.nama_pelanggan, p.jml_pelanggan FROM pesanan b LEFT JOIN pelanggan p ON b.id_pelanggan=p.id_pelanggan WHERE id_pesanan='$id_pesanan'");
+                if ($res) {
+                    if ($res->num_rows > 0) {
+                        $data = $res->fetch_assoc();
+                        $res->free();
+                        return $data;
+                    } else
+                    return FALSE;
                 } else
                 return FALSE;
             } else
             return FALSE;
-        } else
-        return FALSE;
-    }
+        }
 
-    function getDetail($meja, $menu) {
-        $db = dbConnect();
-        if ($db->connect_errno == 0) {
-            $res = $db->query("SELECT * FROM detail_pesanan, meja_dan_kursi, menu_minuman WHERE no_meja = '$meja' AND meja_dan_kursi.id_pesanan = detail_pesanan.id_pesanan AND detail_pesanan.id_menu = '$menu' AND detail_pesanan.id_menu = menu_minuman.id_menu");
-            if ($res) {
-                if ($res->num_rows > 0) {
-                    $data = $res->fetch_assoc();
-                    $res->free();
-                    return $data;
+        function getDetail($meja, $menu) {
+            $db = dbConnect();
+            if ($db->connect_errno == 0) {
+                $res = $db->query("SELECT * FROM detail_pesanan, meja_dan_kursi, menu_minuman WHERE no_meja = '$meja' AND meja_dan_kursi.id_pesanan = detail_pesanan.id_pesanan AND detail_pesanan.id_menu = '$menu' AND detail_pesanan.id_menu = menu_minuman.id_menu");
+                if ($res) {
+                    if ($res->num_rows > 0) {
+                        $data = $res->fetch_assoc();
+                        $res->free();
+                        return $data;
+                    } else
+                    return FALSE;
                 } else
                 return FALSE;
             } else
             return FALSE;
-        } else
-        return FALSE;
-    }
+        }
 
-    function getStatus($pesan, $menu) {
-        $db = dbConnect();
-        if ($db->connect_errno == 0) {
-            $res = $db->query("SELECT `status` FROM detail_pesanan WHERE id_pesanan = '$pesan' AND id_menu = '$menu'");
-            if ($res) {
-                if ($res->num_rows > 0) {
-                    $data = $res->fetch_assoc();
-                    $res->free();
-                    return $data;
+        function getStatus($pesan, $menu) {
+            $db = dbConnect();
+            if ($db->connect_errno == 0) {
+                $res = $db->query("SELECT `status` FROM detail_pesanan WHERE id_pesanan = '$pesan' AND id_menu = '$menu'");
+                if ($res) {
+                    if ($res->num_rows > 0) {
+                        $data = $res->fetch_assoc();
+                        $res->free();
+                        return $data;
+                    } else
+                    return FALSE;
                 } else
                 return FALSE;
             } else
             return FALSE;
-        } else
-        return FALSE;
-    }
+        }
 
         function redirect($url) { /* function untuk redirect url jika header tidak berfungsi */
             if (!headers_sent())
@@ -253,7 +253,7 @@
                 Swal.fire({
                     icon : 'error',
                     title : 'Kesalahan',
-                    text : 'Upload Gambar Gagal. Cek kembali Type dan Ukuran gambar.',
+                    text : 'Upload Gambar Gagal. Cek kembali Input Gambar serta Type dan Ukuran gambar.',
                     confirmButtonText: 'Ok',
                     confirmButtonColor: '#6A6363',
                 })
@@ -264,8 +264,44 @@
             $(document).ready(function() {
                 Swal.fire({
                     icon : 'warning',
-                    title : 'Kesalahan',
+                    title : 'Peringatan',
                     text : 'Data Tidak Ditemukan.',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#6A6363',
+                })
+            });
+        }
+
+        function inputkosong() { /* alert untuk data kosong */
+            $(document).ready(function() {
+                Swal.fire({
+                    icon : 'warning',
+                    title : 'Peringatan',
+                    text : 'Silahkan Input Data Terlebih Dahulu.',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#6A6363',
+                })
+            });
+        }
+
+        function idkosong() { /* alert untuk data kosong */
+            $(document).ready(function() {
+                Swal.fire({
+                    icon : 'warning',
+                    title : 'Peringatan',
+                    text : 'ID Tidak Boleh Kosong.',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#6A6363',
+                })
+            });
+        }
+
+        function mejakosong() { /* alert untuk data kosong */
+            $(document).ready(function() {
+                Swal.fire({
+                    icon : 'error',
+                    title : 'Kesalahan',
+                    text : 'Simpan Data Gagal. No Meja Kosong.',
                     confirmButtonText: 'Ok',
                     confirmButtonColor: '#6A6363',
                 })
@@ -275,8 +311,8 @@
         function unknownerror() { /* alert untuk error yang tidak diketahui. validasi error. */
             $(document).ready(function() {
                 Swal.fire({
-                    icon : 'warning',
-                    title : 'Peringatan',
+                    icon : 'error',
+                    title : 'Kesalahan',
                     text : 'Error tidak dikenal.',
                     confirmButtonText: 'Ok',
                     confirmButtonColor: '#6A6363',

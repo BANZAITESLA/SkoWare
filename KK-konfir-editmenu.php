@@ -48,15 +48,15 @@
             $ext = strtolower(end($ext));
             
             unlink("gambar/".$lama);
+            if(!in_array($ext, $extValid)) {
+                return false;
+            }
+    
+            if($size > 5000000) {
+                return false;
+            }
             move_uploaded_file($tmpName, 'gambar/'.$namafile);
             return $namafile;
-        }
-        if(!in_array($ext, $extValid)) {
-            return false;
-        }
-
-        if($size > 5000000) {
-            return false;
         }
     }
 ?>

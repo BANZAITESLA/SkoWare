@@ -1,6 +1,6 @@
 <?php
-      include_once("sidebar-header.php");
-      sidehead("spelayan.php");
+    include_once("sidebar-header.php");
+    sidehead("spelayan.php");
 ?>
 
 <html lang="en">
@@ -33,7 +33,6 @@
             font-size: 24px;
             letter-spacing: 10px;
         }
-
         .form {
             margin-top: 40px;
             width: 100%;
@@ -43,11 +42,10 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
-           
+
             margin-top: 15px;
         }
         .form-control label {
-            
             width: 25%;
 
             font-weight: bold;
@@ -67,7 +65,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
         }
         .simpan {
             padding: 10px;
@@ -86,36 +83,35 @@
     </style>
 </head>
 <body>
-	<?php
-		if (isset($_GET["error"])) { /* ketika terdapat error */
-			$error = $_GET["error"];
-			if ($error == 1) {
-				echo '<script type="text/javascript">','sqlerror();','</script>'; /* alert tambah data gagal */
-			} 
-			else {
-				echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
-			}
-		}
-	?>
+    <?php
+        if (isset($_GET["error"])) { /* ketika terdapat error */
+            $error = $_GET["error"];
+            if ($error == 1) {
+                echo '<script type="text/javascript">','sqlerror();','</script>'; /* alert tambah data gagal */
+            } 
+            else {
+                echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
+            }
+        }
+    ?>
 
+    <div class="isi">
+        <div class="judul"> <!-- judul page -->
+            TAMBAH DATA MEJA DAN KURSI
+        </div>
 
-	<div class="isi">
-		<div class="judul"> <!-- judul page -->
-			TAMBAH DATA MEJA DAN KURSI
-		</div>
-	   
-		<form class="form" action="SimpanL013.php" method="post">
-			<div class="form-control">
-				<label for="no_meja">No Meja</label>
-				<input type="text" name="no_meja" id=no""></input>
-			</div>
+        <form class="form" action="SimpanL013.php" method="post">
+            <div class="form-control">
+                <label for="no_meja">No Meja</label>
+                <input type="text" name="no_meja" id="no"></input>
+            </div>
 
-			<div class="simpan-control">
-				<input class="simpan" type="submit" value="Simpan No Meja" name="simpan"></input>
-			</div>
-		</form>
-	</div>
-	<script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
+            <div class="simpan-control">
+                <input class="simpan" accesskey="s" type="submit" value="Simpan No Meja" name="simpan"></input>
+            </div>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
     <script>
         new AutoNumeric('#no', { /* live format angka */
             decimalPlaces: '0',

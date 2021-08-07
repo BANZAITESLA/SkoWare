@@ -47,10 +47,10 @@
             table-layout:fixed;
             width: 67vw;
         }
-        tbody {
+        .table tbody {
             display:block;
             overflow-y:auto;
-            max-height:24vw; /* ubah untuk menyesuaikan tinggi tabel */
+            max-height:17vw; /* ubah untuk menyesuaikan tinggi tabel */
             width: 100%;
         }
         th {
@@ -127,11 +127,9 @@
                     if(isset($_GET['pesan'])) { /* ketika ada input cari */
                         $pesan = $_GET["pesan"]; 
                         $meja = $_GET["meja"];
-                        $total = "UPDATE pesanan SET total = (SELECT SUM(sub_total) FROM detail_pesanan WHERE id_pesanan = '$pesan'), tgl_bayar = CURRENT_TIMESTAMP WHERE id_pesanan = '$pesan'";
-                        $hapus = "DELETE FROM detail_pesanan WHERE qty = 0 AND id_pesanan = '$pesan'";
-                        $sql = "SELECT detail_pesanan.id_menu, nama_menu, harga_item, qty, sub_total FROM detail_pesanan, menu_minuman WHERE detail_pesanan.id_menu = menu_minuman.id_menu AND detail_pesanan.id_pesanan = '$pesan'";
+                        $total = "UPDATE pesanan SET total = (SELECT SUM(sub_total) FROM detail_pesanan WHERE id_pesanan = '$pesan') WHERE id_pesanan = '$pesan'";
+                        $sql = "SELECT detail_pesanan.id_menu, detail_pesanan.status, nama_menu, harga_item, qty, sub_total FROM detail_pesanan, menu_minuman WHERE detail_pesanan.id_menu = menu_minuman.id_menu AND detail_pesanan.id_pesanan = '$pesan' AND qty > 0";
                         $restotal = $db->query($total);
-                        $reshapus = $db->query($hapus);
                         $res = $db->query($sql);
                         if ($res) {
                             if($datapesanan=getDataPesanan($pesan)) {
@@ -157,6 +155,7 @@
                                 <table class="table" cellspacing="0" cellpadding="5">
                                     <thead>
                                         <tr>
+                                            <th width="100px">Status</th>
                                             <th>Nama Menu</th>
                                             <th width="150px">Harga Item</th>
                                             <th width="50px">Qty</th>
@@ -169,15 +168,16 @@
                                         foreach ($data as $barisdata) { // telusuri satu per satu
             ?>
                                             <tr>
+                                                <td align=center width="100px"><?php echo $barisdata["status"];?></td>
                                                 <td align=left><?php echo $barisdata["nama_menu"];?></td>
                                                 <td align=right width="150px"><?php echo "Rp ".number_format($barisdata["harga_item"],0,",",".");?></td>
-                                                <td align=right width="50px"><?php echo $barisdata["qty"];?></td>
+                                                <td align=center width="50px"><?php echo $barisdata["qty"];?></td>
                                                 <td align=right width="150px"><?php echo "Rp ".number_format($barisdata["sub_total"],0,",",".");?></td>
                                             </tr>
-                                    </tbody>
             <?php
                                         }
             ?>
+                                    </tbody>
                                     <tfoot>
                                         <tr>
                                             <td align=right colspan="4" style='background-color:#998F8F'><strong>Total</strong></td>
@@ -189,7 +189,7 @@
             ?>
                                 </table>
                                 <div class="selesai" id="selesai">
-                                    <button>Pembayaran Selesai</button>
+                                    <button accesskey="s">Pembayaran Selesai</button>
                                 </div>
             <?php
                         }
@@ -221,7 +221,7 @@
                     Swal.fire({
                         icon : 'success',
                         title : 'Berhasil',
-                        text : 'Data telah diupdate.',
+                        text : 'Data Berhasil Disimpan.',
                         confirmButtonText : 'Ok',
                         confirmButtonColor : '#6A6363'
                     }).then((result) => { /* jika proses berhasil maka load table kembali */

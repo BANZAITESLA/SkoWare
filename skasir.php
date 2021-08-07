@@ -66,12 +66,12 @@
                 <h1>Dashboard Kasir</h1>
 
                 <div class="button"> <!-- isi button -->
-                    <a href="pembayaran.php">Pembayaran Minuman</a>
-                    <a href="KS-laporan.php">Laporan Keuangan</a>
+                    <a href="pembayaran.php" accesskey="b">Pembayaran Minuman</a>
+                    <a href="KS-laporan.php" accesskey="u">Laporan Keuangan</a>
                 </div>
 
                 <div class="logout">
-                    <a href="logout.php">Logout</a>
+                    <a href="logout.php" accesskey="l">Logout</a>
                 </div>
 
                 <div class="creator"> <!-- tulisan creator -->

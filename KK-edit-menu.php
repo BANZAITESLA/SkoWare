@@ -142,7 +142,7 @@
                             </input>
                         </div>
                         <div class="simpan-control">
-                            <input class="simpan" type="submit" value="Simpan Menu Minuman" name="simpan"></input>
+                            <input class="simpan" type="submit" accesskey="s" value="Simpan Menu Minuman" name="simpan"></input>
                         </div>
                     </form>
         <?php

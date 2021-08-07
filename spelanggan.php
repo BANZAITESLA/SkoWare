@@ -53,8 +53,8 @@
                 <h1>Cek Pesananmu!</h1>
 
                 <div class="button"> <!-- isi button -->
-                    <a href="index.php">List Pesanan Pelanggan</a>
-                    <a href="list-menu.php">List Menu Minuman</a>
+                    <a href="index.php" accesskey="p">List Pesanan Pelanggan</a>
+                    <a href="list-menu.php" accesskey="m">List Menu Minuman</a>
                 </div>
 
                 <div class="creator"> <!-- tulisan creator -->

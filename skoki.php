@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard Koki</title>
     <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/jquery-ui.css">
     <style>
@@ -42,7 +42,7 @@
         }
         .logout a{
             display: block;
-            margin: 115px 10px 20px 10px;
+            margin: 200px 10px 20px 10px;
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -67,13 +67,12 @@
                 <h1>Dashboard Koki</h1>
 
                 <div class="button"> <!-- isi button -->
-                    <a href="dkoki.php">Menu Minuman</a>
-                    <a href="koki-pesanan-minuman.php">Pesanan Minuman</a>
-                    <a href="listmenu.php">Pesanan Selesai</a>
+                    <a href="dkoki.php" accesskey="m">Menu Minuman</a>
+                    <a href="L009.php" accesskey="p">Pesanan Minuman</a>
                 </div>
 
                 <div class="logout">
-                    <a href="logout.php">Logout</a>
+                    <a href="logout.php" accesskey="l">Logout</a>
                 </div>
 
                 <div class="creator"> <!-- tulisan creator -->

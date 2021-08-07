@@ -43,7 +43,7 @@
         tbody {
             display:block;
             overflow-y:auto;
-            max-height:24vw; /* ubah untuk menyesuaikan tinggi tabel */
+            max-height:20vw; /* ubah untuk menyesuaikan tinggi tabel */
             width: 100%;
         }
         th {
@@ -86,13 +86,6 @@
                 echo '<script type="text/javascript">','dberror();','</script>'; /* alert koneksi db error */
             } else {
                 echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
-            }
-        }
-
-        if (isset($_GET["success"])) { /* ketika proses berhasil */
-            $success = $_GET["success"];
-            if ($success== 1) {
-                echo '<script type="text/javascript">','tambahsuccess();','</script>'; /* alert berhasil tambah data */
             }
         }
     ?>

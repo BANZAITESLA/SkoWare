@@ -23,10 +23,11 @@
                 </div>
 <?php
             }
-            $res->free();
+        } else {
+            echo '<script type="text/javascript">','nodata();','</script>'; /* alert untuk data tidak ditemukan */
         }
+        $res->free();
     } else {
-        $url = 'PL-konfir-menu.php?error=1';  /* koneksi db gagal */
-        redirect($url);
+        echo '<script type="text/javascript">','dberror();','</script>'; /* alert koneksi db error */
     }
 ?>

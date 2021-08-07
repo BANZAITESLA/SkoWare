@@ -4,7 +4,7 @@
 
     if($db->connect_errno==0){ /* ketika koneksi db success */
         $status = 'Selesai';
-        $sql = "SELECT * FROM detail_pesanan, meja_dan_kursi, menu_minuman WHERE detail_pesanan.id_pesanan = meja_dan_kursi.id_pesanan AND menu_minuman.id_menu = detail_pesanan.id_menu AND detail_pesanan.`status` = 'Selesai'";
+        $sql = "SELECT * FROM detail_pesanan, meja_dan_kursi, menu_minuman WHERE detail_pesanan.id_pesanan = meja_dan_kursi.id_pesanan AND menu_minuman.id_menu = detail_pesanan.id_menu AND detail_pesanan.`status` = 'Selesai' AND detail_pesanan.qty > 0";
         $res=$db->query($sql);
         $no = 1;
         if($res) {

@@ -75,7 +75,7 @@ $db = dbConnect();
         tbody {
             display: block;
             overflow-y: auto;
-            max-height: 21vw;
+            max-height: 24vw;
             /* ubah untuk menyesuaikan tinggi tabel */
             width: 100%;
         }
@@ -135,11 +135,7 @@ $db = dbConnect();
     if (isset($_GET["error"])) { /* ketika terdapat error */
         $error = $_GET["error"];
         if ($error == 1) {
-            echo '<script type="text/javascript">', 'dberror();', '</script>'; /* alert koneksi db error */
-        } else if ($error == 2) {
-            echo '<script type="text/javascript">', 'nodata();', '</script>'; /* alert untuk data tidak ditemukan */
-        } else if ($error == 3) {
-            echo '<script type="text/javascript">', 'sqlerror();', '</script>'; /* alert untuk data tidak ditemukan */
+            echo '<script type="text/javascript">', 'inputkosong();', '</script>'; 
         } else {
             echo '<script type="text/javascript">', 'unknownerror();', '</script>'; /* alert error tdk diketahui */
         }
@@ -151,10 +147,9 @@ $db = dbConnect();
             echo '<script type="text/javascript">', 'tambahsuccess();', '</script>'; /* alert berhasil tambah data */
         }
     }
-    ?>
-    <?php
+
     if ($db->connect_errno == 0) { /* ketika koneksi db success */
-        if (isset($_GET['meja'])) { /* ketika ada input cari */
+        if (isset($_GET['meja'])) {
     ?>
             <div class="isi">
                 <div class="judul">
@@ -176,17 +171,17 @@ $db = dbConnect();
                                 <th width="100px">ID Menu</th>
                                 <th>Nama Menu</th>
                                 <th width="70px">Qty</th>
+                                <th width="100px">Status</th>
                                 <th width="70px">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- body table -->
                             <?php
-                            if ($db->connect_errno == 0) { /* ketika koneksi db success */
                                 $meja = $_GET["meja"];
-                                $detail = "SELECT * FROM detail_pesanan, menu_minuman, meja_dan_kursi WHERE no_meja = '$meja' AND detail_pesanan.id_menu = menu_minuman.id_menu AND meja_dan_kursi.id_pesanan = detail_pesanan.id_pesanan";
+                                $detail = "SELECT *, detail_pesanan.status AS detail FROM detail_pesanan, menu_minuman, meja_dan_kursi WHERE no_meja = '$meja' AND detail_pesanan.id_menu = menu_minuman.id_menu AND meja_dan_kursi.id_pesanan = detail_pesanan.id_pesanan";
                                 $resmenu = $db->query($detail);
-                                if ($resmenu) {
+                                if ($resmenu -> num_rows != 0) {
                                     $data = $resmenu->fetch_all(MYSQLI_ASSOC);
                                     foreach ($data as $barisdata) { /* looping untuk menampilkan hasil query */
                             ?>
@@ -194,16 +189,16 @@ $db = dbConnect();
                                             <td align="center" width="100px"><?php echo $barisdata["id_menu"]; ?></td>
                                             <td><?php echo $barisdata["nama_menu"]; ?></td>
                                             <td align="center" width="70px"><?php echo $barisdata["qty"]; ?></td>
-                                            <td align="center" width="70px"><a href="L01baru-qty.php?no=<?php echo $meja;?>&menu=<?php echo $barisdata["id_menu"];?>&qty=<?php echo $barisdata["qty"]; ?>"><button>Tambah</button></a></td>
+                                            <td align="center" width="100px"><?php echo $barisdata["detail"]; ?></td>
+                                            <td align="center" width="70px"><a href="L01baru-qty.php?no=<?php echo $meja;?>&menu=<?php echo $barisdata["id_menu"];?>&qty=<?php echo $barisdata["qty"]; ?>"><button <?php echo ($barisdata["detail"] == "Selesai" || $barisdata["detail"] == "Sampai" ? "disabled style='background-color:#998F8F'" : "") ;?>>Tambah</button></a></td>
                                         </tr>
                             <?php
                                     }
-                                    $resmenu->free();
+                                } else {
+                                    $url = 'L012.php?error=2'; 
+                                    redirect($url);
                                 }
-                            } else {
-                                $url = 'dkoki.php?error=1';  /* koneksi db gagal */
-                                redirect($url);
-                            }
+                                $resmenu->free();
                             ?>
                         </tbody>
                     </table>
@@ -211,10 +206,12 @@ $db = dbConnect();
             </div>
     <?php
         }
+    } else {
+        $url = 'L012.php?error=1';  /* koneksi db gagal */
+        redirect($url);
     }
     ?>
 </body>
-
 </html>
 <script src="dist/sweetalert2.all.min.js"></script>
 <script src="js/jquery-3.3.1.min.js"></script>

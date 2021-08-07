@@ -35,10 +35,14 @@
     <?php
                         }
     ?>
+                    </tbody>
                 </table>
     <?php
-                $res->free();
             }
+            $res->free();
+        } else {
+            $url = "pembayaran.php?error=1";
+            redirect($url);
         }
     ?>
 </div>

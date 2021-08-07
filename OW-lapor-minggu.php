@@ -35,6 +35,7 @@
         .tgl {
             margin-top: 10px;
             font-size: 18px;
+            letter-spacing: 5px;
         }
         .table {
             margin-top: 15px;
@@ -47,7 +48,7 @@
         tbody {
             display:block;
             overflow-y:auto;
-            max-height:21vw; /* ubah untuk menyesuaikan tinggi tabel */
+            max-height:24vw; /* ubah untuk menyesuaikan tinggi tabel */
             width: 100%;
         }
         th {
@@ -80,12 +81,24 @@
     </style>
 </head>
 <body>
+    <?php
+        if (isset($_GET["error"])) { /* ketika terdapat error */
+            $error = $_GET["error"];
+            if ($error == 1) {
+                echo '<script type="text/javascript">','dberror();','</script>'; /* alert koneksi db error */
+            } else {
+                echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
+            }
+        }
+    ?>
     <div class="isi">
         <div class="judul"> <!-- judul page -->
             LAPORAN PENDAPATAN PERIODIK RESTORAN<br>
                 <div class="tgl">
                     <?php
-                        echo "Minggu ke - ".date("W");
+                        setlocale(LC_ALL, 'id-ID', 'id_ID');
+                        $date = strftime("%W");
+                        echo "Minggu ke - ".$date;
                     ?>
                 </div>
         </div>
@@ -100,29 +113,47 @@
                 </thead>
                 <tbody> <!-- body table -->
                     <?php
-                        $week = date('W');
-                        $date = date('Y-M-d');
                         if($db->connect_errno==0){ /* ketika koneksi db success */
-                            $sql = "SELECT SUM(total) AS total FROM pesanan WHERE WEEK(tgl_bayar) = '$week'";
+                            $sql = "SELECT DATE(tgl_bayar) AS tanggal, SUM(total) AS total FROM pesanan WHERE WEEK(tgl_bayar) = $date GROUP BY DATE(tgl_bayar)";
                             $res=$db->query($sql);
                             if($res) {
                                 $data=$res->fetch_all(MYSQLI_ASSOC);
                                 foreach($data as $barisdata){ /* looping untuk menampilkan hasil query */
                     ?>
                                     <tr>
-                                        <td><?php echo $date;?></td>
+                                        <td><?php echo (strftime("%d %B %Y", strtotime($barisdata["tanggal"])));?></td>
                                         <td align="right"><?php echo "Rp ".number_format($barisdata["total"],0,",",".");?></td>
                                     </tr>
                     <?php
                                 }
                                 $res->free();
                             }
+                    ?>
+                </tbody>
+                <tfoot>
+                    <?php
+                        $sql2 = "SELECT SUM(total) AS total FROM pesanan WHERE WEEK(tgl_bayar) = '$date'";
+                        $res2=$db->query($sql2);
+                        if($res2) {
+                            $data=$res2->fetch_all(MYSQLI_ASSOC);
+                            foreach($data as $barisdata){
+                    ?>
+                                <tr>
+                                    <td align=right colspan="4" style='background-color:#998F8F'><strong>Total</strong></td>
+                                    <td align=right width="150px" style='background-color:#998F8F'><strong><?php echo "Rp ".number_format($barisdata["total"],0,",",".");?></strong></td>
+                                </tr>
+                    <?php
+                            }
+                        }
+                        $res2->free();
+                    ?>
+                </tfoot>
+                    <?php
                         } else {
-                            $url = 'dkoki.php?error=1';  /* koneksi db gagal */
+                            $url = 'OW-lapor-minggu.php?error=1';  /* koneksi db gagal */
                             redirect($url);
                         }
                     ?>
-                </tbody>
             </table>
         </div>
     </div>

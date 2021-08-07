@@ -8,41 +8,42 @@
             $username = $db->escape_string($_POST['username']);
             $password = $db->escape_string($_POST['password']);
 
-            $sql = "SELECT id_pegawai, nama_pegawai FROM pegawai WHERE id_pegawai = '$username' and `password` = md5('$password')";
-            $res = $db->query($sql);
+            if($username == "" || $password == "") {
+                $url = 'login.php?error=4';
+                redirect($url);
+            } else {
+                $sql = "SELECT id_pegawai, nama_pegawai FROM pegawai WHERE id_pegawai = '$username' and `password` = md5('$password')";
+                $res = $db->query($sql);
 
-            if($res) { /* jika ada hasil dari query */
-                if($res -> num_rows == 1) { /* hasil berisi 1 baris */
-                    $data = $res -> fetch_assoc();
-                    $_SESSION['id_pegawai'] = $data['id_pegawai'];
-                    $_SESSION['nama_pegawai'] = $data['nama_pegawai'];
-                    
-                    $parse = substr($_SESSION['id_pegawai'], 0, 2);
-                    if ($parse == 'KK') {
-                        $url = 'dkoki.php'; /* dashboard koki */
-                    } else if($parse == 'KS'){
-                        $url = 'pembayaran.php'; /* dashboard kasir */
-                    } else if($parse == 'PL'){
-                        $url = 'L012.php'; /* dashboard pelanggan */
+                if($res) { /* jika ada hasil dari query */
+                    if($res -> num_rows == 1) { /* hasil berisi 1 baris */
+                        $data = $res -> fetch_assoc();
+                        $_SESSION['id_pegawai'] = $data['id_pegawai'];
+                        $_SESSION['nama_pegawai'] = $data['nama_pegawai'];
+                        
+                        $parse = substr($_SESSION['id_pegawai'], 0, 2);
+                        if ($parse == 'KK') {
+                            $url = 'dkoki.php'; /* dashboard koki */
+                        } else if($parse == 'KS'){
+                            $url = 'pembayaran.php'; /* dashboard kasir */
+                        } else if($parse == 'PL'){
+                            $url = 'L012.php'; /* dashboard pelanggan */
+                        } else {
+                            $url = 'OW-lapor-minggu.php'; /* dashboard pemilik*/
+                        }
+                        redirect($url);
+                        
                     } else {
-                        $url = 'OW-lapor-minggu.php'; /* dashboard pemilik*/
+                        /* notif password uname salah */
+                        $url = 'login.php?error=2';
+                        redirect($url);
                     }
-                    redirect($url);
-                    
-                } else {
-                    /* notif password uname salah */
-                    $url = 'login.php?error=1';
-                    redirect($url);
                 }
             }
-        } else {
-            /* notif login terlebih dahulu */
-            $url = 'login.php?error=2';
-            redirect($url);
         }
     } else {
         /* notif db eror */
-        $url = 'login.php?error=3';
+        $url = 'login.php?error=1';
         redirect($url);
     }
 ?>

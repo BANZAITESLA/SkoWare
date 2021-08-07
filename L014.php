@@ -120,7 +120,7 @@
                         </div>
 
                         <div class="simpan-control">
-                            <input class="simpan" type="submit" value="Simpan No Meja" name="TblSimpan"></input>
+                            <input class="simpan" accesskey="s" type="submit" value="Simpan Data Pelanggan" name="TblSimpan"></input>
                         </div>
         </form>
             <?php

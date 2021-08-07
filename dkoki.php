@@ -161,7 +161,7 @@
         <div class="table" id="table"></div> <!-- tempat table -->
 
         <div class="simpan"> <!-- button simpan -->
-            <a href="list-menu.php">Simpan dan Lihat Menu Hari Ini</a>
+            <a href="list-menu.php">Lihat Menu Hari Ini</a>
         </div>
     </div>
 

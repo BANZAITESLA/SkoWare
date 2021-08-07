@@ -98,6 +98,8 @@
                 echo '<script type="text/javascript">','sqlerror();','</script>'; /* alert tambah data gagal */
             } else if ($error == 2) {
                 echo '<script type="text/javascript">','uploaderror();','</script>'; /* alert upload gambar gagal */
+            } else if ($error == 3) {
+                echo '<script type="text/javascript">','idkosong();','</script>'; /* alert id kosong */
             } else {
                 echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
             }
@@ -130,7 +132,7 @@
                 </input>
             </div>
             <div class="simpan-control">
-                <input class="simpan" type="submit" value="Simpan Menu Minuman" name="simpan"></input>
+                <input class="simpan" accesskey="s" type="submit" value="Simpan Menu Minuman" name="simpan"></input>
             </div>
         </form>
     </div>

@@ -6,6 +6,7 @@
     <table cellspacing="0" cellpadding="5">
         <thead> <!-- header table -->
             <tr>
+                <th width="80px">ID Menu</th>
                 <th>Nama Menu</th>
                 <th width="50px">Stok</th>
                 <th width="160px">Harga Item</th>
@@ -27,12 +28,13 @@
                         foreach($data as $barisdata){ /* looping untuk menampilkan hasil query */
             ?>
                             <tr>
+                                <td align="center" width="80px"><?php echo $barisdata["id_menu"];?></td>
                                 <td><?php echo $barisdata["nama_menu"];?></td>
-                                <td align="right" width="50px"><?php echo $barisdata["stok"];?></td>
+                                <td align="center" width="50px"><?php echo $barisdata["stok"];?></td>
                                 <td align="right" width="160px"><?php echo "Rp ".number_format($barisdata["harga_item"],0,",",".");?></td>
                                 <td align="center" width="120px">
                                     <a href="KK-edit-menu.php?id_menu=<?php echo $barisdata["id_menu"];?>"><button>Edit</button></a>
-                                    <a href="#"><button class="hapus" id="hapus=<?php echo $barisdata["id_menu"];?>">Hapus</button></a>
+                                    <a href="#"><button id="hapus=<?php echo $barisdata["id_menu"];?>">Hapus</button></a>
                                 </td>
                             </tr>
 
@@ -71,10 +73,9 @@
                                 })
                             </script>
             <?php
-            
                         }
-                        $res->free();
                     }
+                    $res->free();
                 } else {
                     $url = 'dkoki.php?error=1';  /* koneksi db gagal */
                     redirect($url);

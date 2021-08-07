@@ -1,6 +1,6 @@
 <?php
-      include_once("sidebar-header.php");
-      sidehead("spelayan.php");
+    include_once("sidebar-header.php");
+    sidehead("spelayan.php");
 ?>
 
 <html lang="en">
@@ -36,12 +36,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-			
+
             margin-left: 87%;
-			margin-top: 20px;
+            margin-top: 20px;
             text-align: center;
             width: 100px;
-            padding: 5px;
+            padding: 9px;
 
             background-color: #6A6363;
             border-radius: 10px;
@@ -93,17 +93,19 @@
             font-family: inherit;
             font-size: 12px;
         }
-		.form {
+        .form {
             display: inherit;
         }
     </style>
 </head>
 <body> 
-	<?php
+    <?php
         if (isset($_GET["error"])) { /* ketika terdapat error */
             $error = $_GET["error"];
             if ($error == 1) {
                 echo '<script type="text/javascript">','dberror();','</script>'; /* alert koneksi db error */
+            } else if($error == 2){
+                echo '<script type="text/javascript">','nodata();','</script>'; /* alert error tdk diketahui */
             } else {
                 echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
             }
@@ -113,21 +115,21 @@
             $success = $_GET["success"];
             if ($success== 1) {
                 echo '<script type="text/javascript">','tambahsuccess();','</script>'; /* alert berhasil tambah data */
-			}
-		}
+            }
+        }
     ?>
-	<div class="isi">
+    <div class="isi">
         <div class="judul"> <!-- judul page -->
             ATUR MEJA DAN KURSI
         </div>
-    
-		<div class="tambah"> <!-- button tambah -->
-			<a href="L013.php">Tambah Meja</a>
-		</div>
+            
+        <div class="tambah"> <!-- button tambah -->
+            <a href="L013.php">Tambah Meja</a>
+        </div>
 
-        <div class="table" id="table"></div> <!-- table -->
+        <div class="table" id="table"></div> <!-- tempat table -->
     </div>
-	<script>
+    <script>
         $(document).ready(function(){
             load_data();
 

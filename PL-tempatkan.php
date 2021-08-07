@@ -128,7 +128,7 @@
                         <div class="form-control">
                             <label for="no_meja">No Meja</label>
                             <select name="no_meja">
-                                <option>-- Pilih Meja --</option>
+                                <option value="0">-- Pilih Meja --</option>
                                 <?php
                                     $dataMeja = getMejaKosong();
                                     foreach($dataMeja as $data) {
@@ -139,7 +139,7 @@
                         </div>
 
                         <div class="simpan-control">
-                            <input class="simpan" type="submit" value="Simpan Waiting List" name="TblUpdate"></input>
+                            <input class="simpan" accesskey="s" type="submit" value="Tempatkan" name="TblUpdate"></input>
                         </div>
         </form>
             <?php

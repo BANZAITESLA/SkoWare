@@ -1,8 +1,8 @@
 <?php
     session_start();
     function sidehead($filesidebar) {
-        include_once("$filesidebar");
-        include_once("functions.php");
+    include_once("$filesidebar");
+    include_once("functions.php");
 ?>
         <html lang="en">
         <head>
@@ -47,7 +47,13 @@
                 ?>
                         <div class="nama">    
                             <?php
-                                echo "Hai, ".$_SESSION['nama_pegawai'];
+                                if(!empty($_SESSION['nama_pegawai'])) {
+                                    echo "Hai, ".$_SESSION['nama_pegawai'];
+                                } else {
+                                    $url = 'login.php?error=3';
+                                    redirect($url);
+                                }
+                                
                             ?>
                         </div>
                 <?php

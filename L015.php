@@ -1,6 +1,6 @@
 <?php
-      include_once("sidebar-header.php");
-      sidehead("spelayan.php");
+    include_once("sidebar-header.php");
+    sidehead("spelayan.php");
 ?>
 
 <html lang="en">
@@ -41,7 +41,7 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
-           
+        
             margin-top: 15px;
         }
         .form-control label {
@@ -82,7 +82,7 @@
     </style>
 </head>
 <body>
-	<?php
+    <?php
         if (isset($_GET["error"])) { /* jika terdapar error */
             $error = $_GET["error"];
             if (substr($error, -1) == 1) {
@@ -91,49 +91,49 @@
                 echo '<script type="text/javascript">','uploaderror();','</script>'; /* alert upload gambar gagal */
             } else {
                 echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
-			}
-		}
+            }
+        }
     ?>
 
-	<div class="isi">
+    <div class="isi">
         <div class="judul"> <!-- judul page -->
             EDIT MEJA DAN KURSI
         </div>      
         
         <form class="form" action="UpdateL015.php" method="post">
-        <?php
-            if (isset($_POST["edit"]) or (isset($_GET["error"]))) { /* agar ketika error kembali ke form edit dgn id yg sama */
-                $db=dbConnect();
-                
-                if (isset($_POST["edit"])) {
-                    $no_meja = $db->escape_string($_POST['no_meja']);
-                } else if ($_GET["error"]){
-                    $subno_meja = substr($_GET["error"], 0, -1); /* manipulasi link error untuk mendapatkan id */
-                    $no_meja = $db->escape_string($subno_meja);
-                }
-				
-                if($datamejadankursi=getDataMejaDanKursi($no_meja)){
-        ?>
-					<div class="form-control">
-						<label for="no_meja">No Meja</label>
-						<input type="text" name="no_meja" value="<?php echo $datamejadankursi["no_meja"];?>" readonly></input>
-						<input type="hidden" name="id_pelanggan" value="<?php echo $datamejadankursi["id_pelanggan"];?>"></input>
-					</div>
-					<div class="form-control">
-						<label for="nama_pelanggan">Nama Pelanggan</label>
-						<input type="text" name="nama_pelanggan" value="<?php echo $datamejadankursi["nama_pelanggan"];?>"></input>
-					</div>
-					<div class="form-control">
-						<label for="jml_pelanggan">Jumlah Pelanggan </label>
-						<input type="text" id="jml" name="jml_pelanggan" value="<?php echo $datamejadankursi["jml_pelanggan"];?>"></input>
-					</div>
+            <?php
+                if (isset($_POST["edit"]) or (isset($_GET["error"]))) { /* agar ketika error kembali ke form edit dgn id yg sama */
+                    $db=dbConnect();
+                    
+                    if (isset($_POST["edit"])) {
+                        $no_meja = $db->escape_string($_POST['no_meja']);
+                    } else if ($_GET["error"]){
+                        $subno_meja = substr($_GET["error"], 0, -1); /* manipulasi link error untuk mendapatkan id */
+                        $no_meja = $db->escape_string($subno_meja);
+                    }
 
-					<div class="simpan-control">
-						<input class="simpan" type="submit" value="Simpan Data" name="TblUpdate"></input>
-					</div>
-		</form>
+                    if($datamejadankursi=getDataMejaDanKursi($no_meja)){
+            ?>
+                        <div class="form-control">
+                            <label for="no_meja">No Meja</label>
+                            <input type="text" name="no_meja" value="<?php echo $datamejadankursi["no_meja"];?>" readonly></input>
+                            <input type="hidden" name="id_pelanggan" value="<?php echo $datamejadankursi["id_pelanggan"];?>"></input>
+                        </div>
+                        <div class="form-control">
+                            <label for="nama_pelanggan">Nama Pelanggan</label>
+                            <input type="text" name="nama_pelanggan" value="<?php echo $datamejadankursi["nama_pelanggan"];?>"></input>
+                        </div>
+                        <div class="form-control">
+                            <label for="jml_pelanggan">Jumlah Pelanggan </label>
+                            <input type="text" id="jml" name="jml_pelanggan" value="<?php echo $datamejadankursi["jml_pelanggan"];?>"></input>
+                        </div>
+
+                        <div class="simpan-control">
+                            <input class="simpan" accesskey="s" type="submit" value="Simpan Data" name="TblUpdate"></input>
+                        </div>
+        </form>
         <?php
-				}
+                }
             }
         ?>
 </div>

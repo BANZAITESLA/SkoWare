@@ -1,6 +1,7 @@
 <?php
     include_once("sidebar-header.php");
     sidehead("spelayan.php");
+    include_once("functions.php");
 ?>
 <html lang="en">
 <head>
@@ -75,7 +76,7 @@
         tbody {
             display:block;
             overflow-y:auto;
-            max-height:24vw; /* ubah untuk menyesuaikan tinggi tabel */
+            max-height:23vw; /* ubah untuk menyesuaikan tinggi tabel */
             width: 100%;
         }
         th {
@@ -109,6 +110,27 @@
     </style>
 </head>
 <body>
+    <?php
+        if (isset($_GET["error"])) { /* ketika terdapat error */
+            $error = $_GET["error"];
+            if ($error == 1) {
+                echo '<script type="text/javascript">','dberror();','</script>'; /* alert koneksi db error */
+            } else if ($error == 2){ 
+                echo '<script type="text/javascript">','nodata();','</script>'; /* alert untuk data tidak ditemukan */
+            } else if ($error == 3){ 
+                echo '<script type="text/javascript">','mejakosong();','</script>'; /* alert untuk data tidak ditemukan */
+            } else {
+                echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
+            }
+        }
+
+        if (isset($_GET["success"])) { /* ketika proses berhasil */
+            $success = $_GET["success"];
+            if ($success== 1) {
+                echo '<script type="text/javascript">','tambahsuccess();','</script>'; /* alert berhasil tambah data */
+            }
+        }
+    ?>
     <div class="isi">
         <div class="judul"> <!-- judul page -->
             WAITING LIST
@@ -150,7 +172,6 @@
             
         });
     </script>
-  
 </body>
 </html>
 <script src="dist/sweetalert2.all.min.js"></script>

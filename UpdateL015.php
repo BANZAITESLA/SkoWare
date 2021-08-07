@@ -14,14 +14,14 @@
 
 			$sql = "UPDATE pelanggan SET nama_pelanggan = '$nama_pelanggan', jml_pelanggan = '$jml_pelanggan' WHERE id_pelanggan = '$id_pelanggan'";
 
-            $update = $db->query($sql);
-			if($update) {
-				$url = 'L012.php?success=1';
-				redirect($url);
-			} else {
-				$url = 'L015.php?error='.$no_meja.'1';  //tambah data gagal. sql
-				redirect($url);
-			}  
+            $update= $db->query($sql);
+            if($update) {
+                $url = 'L012.php?success=1';
+                redirect($url);
+            } else {
+                $url = 'L015.php?error='.$no_meja.'1';  //tambah data gagal. sql
+                redirect($url);
+            }
         } 
     } else {
         $url = 'L012.php?error=1';  /* koneksi db gagal */

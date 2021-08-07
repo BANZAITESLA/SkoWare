@@ -86,54 +86,62 @@ $db = dbConnect();
 </head>
 <body>
     <?php
-        if(isset($_GET["menu"]) &&  isset($_GET["no"])) {
-            $meja = $_GET["no"];
-            $menu = $_GET["menu"];
+        if ($db->connect_errno == 0) {
+            if(isset($_GET["menu"]) &&  isset($_GET["no"])) {
+                $meja = $_GET["no"];
+                $menu = $_GET["menu"];
 
-            if($detail=getDetail($meja, $menu)){
+                if($detail=getDetail($meja, $menu)){
     ?>
-                <div class="isi">
-                    <div class="judul">
-                        <!-- judul page -->
-                        TAMBAH PESANAN
-                    </div>
-
-                    <form class="form" action="TambahL01baru.php" method="post">
-                        <div class="form-control">
-                            <label for="no_meja">No Meja</label>
-                            <input type="text" name="no_meja" id="no" value="<?php echo $detail["no_meja"]?>" readonly></input>
+                    <div class="isi">
+                        <div class="judul">
+                            <!-- judul page -->
+                            TAMBAH PESANAN
                         </div>
-                        <div class="form-control">
-                            <label for="id_pesanan">ID Pesanan</label>
-                            <input type="text" name="id_pesanan" id="no" value="<?php echo $detail["id_pesanan"]?>" readonly></input>
-                        </div>
-                        <div class="form-control">
-                            <label for="id_menu">ID Menu</label>
-                            <input type="text" name="id_menu" value="<?php echo $detail["id_menu"]?>" readonly></input>
-                        </div>
-
-                        <div class="form-control">
-                            <label for="nama_menu">Nama Menu</label>
-                            <input type="text" name="nama_menu" value="<?php echo $detail["nama_menu"]?>" readonly></input>
-                        </div>
-
-                        <div class="form-control">
-                            <label for="stok">Stok</label>
-                            <input type="text" name="stok" value="<?php echo $detail["stok"]?>" readonly></input>
-                        </div>
-
-                        <div class="form-control">
-                            <label for="qty">Qty</label>
-                            <input type="number" name="qty" min="0" max="<?php echo $detail["stok"]?>"></input>
-                        </div>
-
-                        <div class="simpan-control">
-                            <input class="simpan" type="submit" value="Tambah" name="<?php echo ($_GET["qty"] == 0 ? "tambah":"update");?>"></input>
-                        </div>
-                    </form>
-            </div>
+    
+                        <form class="form" action="TambahL01baru.php" method="post">
+                            <div class="form-control">
+                                <label for="no_meja">No Meja</label>
+                                <input type="text" name="no_meja" id="no" value="<?php echo $detail["no_meja"]?>" readonly></input>
+                            </div>
+                            <div class="form-control">
+                                <label for="id_pesanan">ID Pesanan</label>
+                                <input type="text" name="id_pesanan" id="no" value="<?php echo $detail["id_pesanan"]?>" readonly></input>
+                            </div>
+                            <div class="form-control">
+                                <label for="id_menu">ID Menu</label>
+                                <input type="text" name="id_menu" value="<?php echo $detail["id_menu"]?>" readonly></input>
+                            </div>
+    
+                            <div class="form-control">
+                                <label for="nama_menu">Nama Menu</label>
+                                <input type="text" name="nama_menu" value="<?php echo $detail["nama_menu"]?>" readonly></input>
+                            </div>
+    
+                            <div class="form-control">
+                                <label for="stok">Stok</label>
+                                <input type="text" name="stok" value="<?php echo $detail["stok"]?>" readonly></input>
+                            </div>
+    
+                            <div class="form-control">
+                                <label for="qty">Qty</label>
+                                <input type="number" name="qty" min="0" max="<?php echo $detail["stok"]?>"></input>
+                            </div>
+    
+                            <div class="simpan-control">
+                                <input class="simpan" accesskey="s" type="submit" value="Tambah" name="update"></input>
+                            </div>
+                        </form>
+                </div>
     <?php
+                } else {
+                    $url = 'L012.php?error=2';
+                    redirect($url);
+                }
             }
+        } else {
+            $url = 'L012.php?error=1';  /* koneksi db gagal */
+            redirect($url);
         }
     ?>
 </body>

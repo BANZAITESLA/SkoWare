@@ -83,16 +83,6 @@
     </style>
 </head>
 <body>
-    <?php
-        if (isset($_GET["error"])) { /* ketika terdapat error */
-            $error = $_GET["error"];
-            if ($error == 1) {
-                echo '<script type="text/javascript">','sqlerror();','</script>'; /* alert tambah data gagal */
-            } else {
-                echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
-            }
-        }
-    ?>
     <div class="isi">
         <div class="judul"> <!-- judul page -->
             TAMBAH WAITING LIST
@@ -105,7 +95,7 @@
             </div>
             <div class="form-control">
                 <label for="no_telp">No Telepon</label>
-                <input type="number" name="no_telp"></input>
+                <input type="tel" name="no_telp"></input>
             </div>
             <div class="form-control">
                 <label for="waktu_datang">Tanggal Datang</label>
@@ -121,7 +111,7 @@
             </div>
 
             <div class="simpan-control">
-                <input class="simpan" type="submit" value="Simpan Waiting List" name="TblSimpan"></input>
+                <input class="simpan" accesskey="s" type="submit" value="Simpan Waiting List" name="TblSimpan"></input>
             </div>
         </form>
             

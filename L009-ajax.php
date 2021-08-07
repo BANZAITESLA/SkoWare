@@ -44,7 +44,7 @@
                                 Swal.fire({
                                     icon : 'success',
                                     title : 'Berhasil',
-                                    text : 'Data Telah disimpan.',
+                                    text : 'Data Telah Dikirim.',
                                     confirmButtonText : 'Ok',
                                     confirmButtonColor : '#6A6363'
                                 }).then((result) => { /* jika proses berhasil maka load table kembali */
@@ -56,11 +56,12 @@
                         })
                     })
                 </script>
-                
 <?php
                 $no++;
             }
-            $res->free();
         }
+        $res->free();
+    } else {
+        echo '<script type="text/javascript">','dberror();','</script>';
     }
 ?>

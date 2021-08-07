@@ -78,13 +78,13 @@
         <div class="sidebar"> <!-- bagian sidebar -->
             <h1>Dashboard Pelayan</h1>
             <div class="button"> <!-- isi button -->
-                <a href="L012.php">Pengaturan Meja</a>
-                <a href="L016.php">Waiting List</a>
-                <a href="L018.php">Pengantaran Pesanan</a>
+                <a href="L012.php" accesskey="m">Pengaturan Meja</a>
+                <a href="L016.php" accesskey="w">Waiting List</a>
+                <a href="L018.php" accesskey="p">Pengantaran Pesanan</a>
             </div>
 
             <div class="logout">
-                <a href="logout.php">Logout</a>
+                <a href="logout.php" accesskey="l">Logout</a>
             </div>
 
             <div class="creator"> <!-- tulisan creator -->

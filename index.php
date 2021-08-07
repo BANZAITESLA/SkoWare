@@ -50,7 +50,7 @@
         tbody {
             display:block;
             overflow-y:auto;
-            max-height:21vw; /* ubah untuk menyesuaikan tinggi tabel */
+            max-height:17vw; /* ubah untuk menyesuaikan tinggi tabel */
             width: 100%;
         }
         th {
@@ -85,7 +85,7 @@
             padding: 10px;
             background-color: #C4C4C4;
         }
-        .form-control .simpan {
+        .form-control .cek {
             padding: 10px;
             margin-left: 20px;
             border: 0 solid;
@@ -107,7 +107,7 @@
         </div>
         <div class="form-control">
             <input id="id" type="text" name="id"  placeholder="Input ID Pesanan Anda">
-            <input id="cek" class="simpan" name="cek" type="submit" value="Cek">
+            <input id="cek" class="cek" name="cek" type="submit" value="Cek">
         </div>
         
         <div class="table" id="table"> <!-- table --></div>

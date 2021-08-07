@@ -82,19 +82,6 @@
     </style>
 </head>
 <body>
-	<?php
-        if (isset($_GET["error"])) { /* jika terdapar error */
-            $error = $_GET["error"];
-            if (substr($error, -1) == 1) {
-                echo '<script type="text/javascript">','sqlerror();','</script>'; /* alert tambah data gagal */
-            } else if (substr($error, -1) == 2) {
-                echo '<script type="text/javascript">','uploaderror();','</script>'; /* alert upload gambar gagal */
-            } else {
-                echo '<script type="text/javascript">','unknownerror();','</script>'; /* alert error tdk diketahui */
-			}
-		}
-    ?>
-
 	<div class="isi">
         <div class="judul"> <!-- judul page -->
             EDIT WAITING LIST
@@ -102,15 +89,9 @@
         
         <form class="form" action="PL-update-editwl.php" method="post">
             <?php
-                if (isset($_GET["id_pesanan"]) or (isset($_GET["error"]))) { /* agar ketika error kembali ke form edit dgn id yg sama */
+                if (isset($_GET["id_pesanan"])) { 
                     $db=dbConnect();
-                    
-                    if (isset($_GET["id_pesanan"])) {
-                        $id_pesanan = $db->escape_string($_GET['id_pesanan']);
-                    } else if ($_GET["error"]){
-                        $subid_pesanan = substr($_GET["error"], 0, -1); /* manipulasi link error untuk mendapatkan id */
-                        $id_pesanan = $db->escape_string($subid_pesanan);
-                    }
+                    $id_pesanan = $db->escape_string($_GET['id_pesanan']);
                     
                     if($datapesanan=getDataPesanan($id_pesanan)){
             ?>
@@ -124,7 +105,7 @@
                         </div>
                         <div class="form-control">
                             <label for="no_telp">No Telepon</label>
-                            <input type="number" name="no_telp" value="<?php echo $datapesanan["no_telp"];?>"></input>
+                            <input type="tel" name="no_telp" value="<?php echo $datapesanan["no_telp"];?>"></input>
                         </div>
                         <div class="form-control">
                             <label for="waktu_datang">Tanggal Datang</label>
@@ -136,11 +117,11 @@
                         </div>
                         <div class="form-control">
                             <label for="jml_pelanggan">Jumlah Pelanggan </label>
-                            <input type="text" name="jml_pelanggan" value="<?php echo $datapesanan["jml_pelanggan"];?>"></input>
+                            <input type="number" name="jml_pelanggan" value="<?php echo $datapesanan["jml_pelanggan"];?>"></input>
                         </div>
 
                         <div class="simpan-control">
-                            <input class="simpan" type="submit" value="Simpan Waiting List" name="TblUpdate"></input>
+                            <input class="simpan" accesskey="s" type="submit" value="Simpan Waiting List" name="TblUpdate"></input>
                         </div>
         </form>
             <?php

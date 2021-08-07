@@ -113,7 +113,7 @@
                                             Swal.fire({
                                                 icon : 'success',
                                                 title : 'Berhasil',
-                                                text : 'Meja telah dihapus.',
+                                                text : 'Data telah dihapus.',
                                                 confirmButtonText : 'Ok',
                                                 confirmButtonColor : '#6A6363'
                                             }).then((result) => { /* jika proses berhasil maka load table kembali */
